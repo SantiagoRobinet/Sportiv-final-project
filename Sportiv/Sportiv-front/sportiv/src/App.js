@@ -10,7 +10,7 @@ function App() {
     <Router>
       <div className="container">
         <Switch>
-          <Route path="/" exact component={EventDetail}/>
+          <Route path="/:eventId" exact component={EventDetail}/>
         </Switch>
       </div>
     </Router>
