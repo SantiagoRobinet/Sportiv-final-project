@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+}
+
+.flex__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.desktop__container {
+  background-color: grey;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.title__container {
+  border: 2px red solid;
+  width: 50%;
+  text-align: center;
+}
+
+p {
+  display: inline-block;
+  margin: 5px 12px;
+  text-align: center;
+}
+
+.image__container {
+  margin: 7px auto;
+}
+
+.description__container {
+  text-align: center;
+}
+
+.info__container {
+  width: 100%;
+  text-align: center;
+}
+
+.inscription__container {
+  width: 100%;
+  text-align: center;
+  margin: 15px auto;
+}
+
+.inscription__button {
+  background-color: #ecc08d;
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  width: 100px;
+  height: 30px;
+}
