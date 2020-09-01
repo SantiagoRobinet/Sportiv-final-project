@@ -47,67 +47,69 @@ function EventDetail(props) {
         <h2>{eventTitle}</h2>
       </div>
       <div className="main__container flex__column">
+        <div className="desktop__container">
         <div className="description__container">
           <h2>Description</h2>
           <p>{eventDescription}</p>
         </div>
 
-        <div className="info__container flex__row">
-          <div className="start__section flex__row">
-            <div className="start-flag">
-                <img src="https://image.flaticon.com/icons/svg/1505/1505471.svg" alt=""/>
-            </div>
-            <div className="start-time flex__column">
-                <div>
-                    <p>Start</p>
-                </div>
-                <div className="event-time">{eventStart}</div>
+          <div className="info__container flex__row">
+            <div className="start__section flex__row">
+              <div className="start-flag">
+                  <img src="https://image.flaticon.com/icons/svg/1505/1505471.svg" alt=""/>
+              </div>
+              <div className="start-time flex__column">
+                  <div>
+                      <p>Start</p>
+                  </div>
+                  <div className="event-time">{eventStart}</div>
 
+              </div>
             </div>
+
+            <div className="flex__column">
+                  <div>
+                      <p>Date</p>
+                  </div>
+                  <div className="event-time">{eventDate}</div>
+
+              </div>
+            
+            <div className="start__section flex__row">
+              <div className="start-flag">
+                  <img src="https://image.flaticon.com/icons/svg/1505/1505471.svg" alt=""/>
+              </div>
+              <div className="start-time flex__column">
+                  <div>
+                      <p>Finish</p>
+                  </div>
+                  <div className="event-time">{eventFinish}</div>
+
+              </div>
+            </div>
+
+
           </div>
+          <div className="inscription__container flex__row">
+            <p>
+              Level <br /> {eventLevel}
+            </p>
+            <button className="inscription__button">I'm in!</button>
 
-          <div className="flex__column">
-                <div>
-                    <p>Date</p>
-                </div>
-                <div className="event-time">{eventDate}</div>
-
-            </div>
-          
-          <div className="start__section flex__row">
-            <div className="start-flag">
-                <img src="https://image.flaticon.com/icons/svg/1505/1505471.svg" alt=""/>
-            </div>
-            <div className="start-time flex__column">
-                <div>
-                    <p>Finish</p>
-                </div>
-                <div className="event-time">{eventFinish}</div>
-
-            </div>
-          </div>
-
-
-        </div>
-        <div className="inscription__container flex__row">
-          <p>
-            Level <br /> {eventLevel}
-          </p>
-          <button className="inscription__button">I'm in!</button>
-
-          <div className="counter flex__row">
-            <div>
-              <span>
-                <img
-                  src="https://www.flaticon.es/premium-icon/icons/svg/3249/3249789.svg"
-                  alt=""
-                />
-              </span>
-            </div>
-            <div>
-              <p>
-                <span className="counter__number">{eventPeople}</span>
-              </p>
+            <div className="counter flex__row">
+              <div>
+                <span>
+                  <img
+                    src="https://www.flaticon.es/premium-icon/icons/svg/3249/3249789.svg"
+                    alt=""
+                  />
+                </span>
+              </div>
+              <div>
+                <p>
+                  <span className="counter__number">{eventPeople}</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

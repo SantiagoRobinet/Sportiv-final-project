@@ -181,6 +181,12 @@ p {
 
 
 @media (min-width: 1024px) {
+
+  .main__container{
+    display: flex;
+    flex-direction: row;
+  }
+
  p{
    font-size: 30px;
  }
@@ -229,7 +235,13 @@ p {
 
  .map__container{
    margin-top: 25px;
-   max-width: 1108px;
+   max-width: 950px;
+   margin-right: 20px;
+ }
+
+ .desktop__container{
+   display: flex;
+   flex-direction: column;
  }
 
 }
