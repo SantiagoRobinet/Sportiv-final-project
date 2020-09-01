@@ -19,7 +19,6 @@ class EventStore extends EventEmitter {
 	}
 
 	getEvents() {
-        console.log(_events)
 		return _events;
 	}
 
@@ -33,7 +32,6 @@ const eventStore = new EventStore();
 dispatcher.register((action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_EVENTS:
-            console.log('ESTOY EN EL STORE')
             _events = action.data;
 			eventStore.emitChange(_events);
 			break;
