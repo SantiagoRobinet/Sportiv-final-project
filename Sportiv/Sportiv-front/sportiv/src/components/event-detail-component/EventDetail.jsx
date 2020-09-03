@@ -2,18 +2,19 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./EventDetail.css";
 import eventStore from "../../stores/EventsStore";
-import { loadEvents } from "../../actions/EventDetailAction";
+import { loadEvents } from "../../actions/EventDetailAction"; 
 
 function EventDetail(props) {
   const [events, setEvents] = useState(eventStore.getEvents());
-  const [eventId, setEventId] = useState(+props.match?.params?.eventId);
+  const [eventId, setEventId] = useState(props.match?.params?.eventId);
   const [eventTitle, setEventTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventStart, setEventStart] = useState("");
   const [eventFinish, setEventFinish] = useState("");
-  const [eventPeople, setEventPeople] = useState("");
+  const [eventParticipants, setEventParticipants] = useState("");
   const [eventLevel, setEventLevel] = useState("");
+  const [eventPhoto, setPhoto] = useState("");
 
   useEffect(() => {
     eventStore.addChangeListener(onChange);
@@ -22,14 +23,15 @@ function EventDetail(props) {
     } else if (eventId) {
       const event = eventStore.getEventById(eventId);
       if (event) {
-        setEventId(event.id);
+        setEventId(event._id);
         setEventTitle(event.title);
         setEventDate(event.date);
         setEventDescription(event.description);
         setEventStart(event.start);
         setEventFinish(event.finish);
-        setEventPeople(event.people);
+        setEventParticipants(event.participants);
         setEventLevel(event.level);
+        setPhoto(event.photo)
       }
     } else {
     }
@@ -43,7 +45,7 @@ function EventDetail(props) {
   return (
     <div className="desktop__container flex__column">
       <div className="title__container flex__row">
-        <img src="https://www.skateshouse.com/wp-content/uploads/2018/10/longboard-skateshouse.com_.jpg" />
+        <img src={eventPhoto} />
         <h2>{eventTitle}</h2>
       </div>
       <div className="main__container flex__column">
@@ -91,9 +93,13 @@ function EventDetail(props) {
 
           </div>
           <div className="inscription__container flex__row">
-            <p>
-              Level <br /> {eventLevel}
-            </p>
+          <div className="flex__column">
+                  <div>
+                      <p>Level</p>
+                  </div>
+                  <div >{eventLevel}</div>
+
+              </div>
             <button className="inscription__button">I'm in!</button>
 
             <div className="counter flex__row">
@@ -107,7 +113,7 @@ function EventDetail(props) {
               </div>
               <div>
                 <p>
-                  <span className="counter__number">{eventPeople}</span>
+                  <span className="counter__number">{eventParticipants}</span>
                 </p>
               </div>
             </div>

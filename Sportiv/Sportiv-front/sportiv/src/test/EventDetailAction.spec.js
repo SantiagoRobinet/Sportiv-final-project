@@ -5,4 +5,12 @@ describe('Event Detail Actions', () => {
         expect(loadEvents).toBeDefined();
     })
 
+    it('should return the data', () => {
+        const axios = {
+            get: () => {return new Promise}
+        }
+
+        
+    })
+
 })

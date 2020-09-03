@@ -1,14 +1,12 @@
 import dispatcher from "../dispatcher";
 import actionTypes from "./actionTypes";
-import event from "../eventmock";
+import axios from 'axios';
 
 export function loadEvents() {
-  return new Promise((resolve) => {
-    resolve(event);
-  }).then((events) =>{
+  return axios.get('/api/events').then((events) =>{
     dispatcher.dispatch({
       type: actionTypes.LOAD_EVENTS,
-      data: events
+      data: events.data
     })
 });
 }

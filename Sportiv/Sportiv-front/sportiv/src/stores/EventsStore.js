@@ -23,7 +23,7 @@ class EventStore extends EventEmitter {
 	}
 
 	getEventById(id) {
-		return _events.find((event) => event.id === id);
+		return _events.find((event) => event._id === id);
 	}
 }
 
