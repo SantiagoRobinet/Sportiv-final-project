@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import eventStore from "../../stores/EventsStore";
-import { loadEvents } from "../../actions/EventDetailAction";
 import "./EventItemComponent.css";
 
 function EventItem({ id }) {
