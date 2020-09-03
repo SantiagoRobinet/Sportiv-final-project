@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 body {
@@ -26,11 +27,12 @@ p {
 }
 
 .details-title {
-  padding-bottom: 25%;
+  padding-bottom: 20%;
 }
 
 .event-card__photo {
   width: 100%;
+  height: fit-content;
 }
 
 .details__info {
@@ -89,6 +91,10 @@ p {
   font-size: 20px;
 }
 
+.info-date {
+  padding-bottom: 18px;
+}
+
 .details-button {
   text-decoration: none;
   background-color: #ecc08d;
@@ -140,11 +146,18 @@ p {
   align-items: baseline;
 }
 
-.details-title > h2{
-    font-size: 2em;
+.details-title > h2 {
+  font-size: 2em;
 }
 
-@media (min-width: 550px) {
+.variable {
+  font-size: 15px;
+}
+
+@media (min-width: 470px) {
+  * {
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
   p {
     font-size: 2rem;
     font-weight: bold;
@@ -167,20 +180,40 @@ p {
     height: 55px;
   }
 
-  .details-title > h2{
-      font-size: 40px;
+  .details-title > h2 {
+    font-size: 40px;
   }
 }
 
-@media (min-width: 750px) {
-  .event-card__container {
-    width: 380px;
-    height: 466px;
+@media screen and (min-width: 730px) {
+  li {
+    width: 30%;
+    min-width: 283px;
+    max-width: 380px;
     margin: 20px;
+    border-radius: 7px;
+
+  }
+
+  li:hover {
+    background-color: rgb(226, 224, 224);
+  }
+
+  .event-card__container {
+    width: 100%;
+    height: 100%;
+  }
+  p {
+    font-size: 27px;
   }
 
   .event-card__photo {
     width: 100%;
+  }
+
+  .details-title > h2 {
+    border-top: 2px black solid;
+    border-bottom: 2px solid black;
   }
 
   .details__info {
@@ -192,12 +225,15 @@ p {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
   }
 
   .details__container {
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 13px;
   }
 
   .details__left {
@@ -219,7 +255,26 @@ p {
 
   .info-start > img {
     margin: 10px;
-    width: 40px;
-    height: 40px;
-}
+    width: 25px;
+    height: 25px;
+  }
+
+  .event-card__container {
+    position: unset;
+  }
+  .details__container {
+    position: unset;
+  }
+
+  .details-title > h2 {
+    font-size: 32px;
+  }
+
+  .details-title {
+    padding-bottom: 40px;
+  }
+
+  .info-date {
+    padding-bottom: 18px;
+  }
 }

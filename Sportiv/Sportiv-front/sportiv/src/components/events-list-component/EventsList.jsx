@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import eventStore from "../../stores/EventsStore";
 import { loadEvents } from "../../actions/EventDetailAction";
 import './EventsList.css'
@@ -28,7 +27,7 @@ function EventsList() {
             <h1>EVENTS</h1>
           </div>
         </div>
-        <ul>
+        <ul className="main__ul__container">
             {events.map((event) => (
                 <li key={event._id}>
                     <EventItem id={event._id}/>

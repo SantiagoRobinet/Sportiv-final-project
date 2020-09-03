@@ -55,7 +55,7 @@ function EventItem({ id }) {
               />
               <div>
                 <p>Start</p>
-                <div className="start-time">{actualEventStartTime}</div>
+                <div className="start-time"><p className="variable">{actualEventStartTime}</p></div>
               </div>
             </div>
             <Link to={`/events/${id}`} className="details-button">
@@ -67,7 +67,7 @@ function EventItem({ id }) {
                 <img src="https://image.flaticon.com/icons/svg/3445/3445710.svg" alt="date" />
                 <div>
               <p>Date</p>
-              <div>{actualEventDate}</div>
+              <div><p className="variable">{actualEventDate}</p></div>
             </div>
             </div>
             <div className="info-participants">
