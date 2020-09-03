@@ -23,6 +23,7 @@ function App() {
           <Route path="/explore"  component={Explore}/>
           <Route path="/login"  component={Login}/>
         </Switch>
+        <Header />
     </Router>
    
   );
