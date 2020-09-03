@@ -1,11 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "./HomePageComponent.css";
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
     <div className="home__main__container">
-      <div className="events__link">EVENTS</div>
-      <div className="groups__link">GROUPS</div>
-      <div className="classes__link">CLASSES</div>
+      
+   <div className="page__link ">
+        <img
+          src="https://www.coe.int/documents/24916852/0/Supporters3.jpg/63b405d6-be6d-d2ec-bd11-0f03c6ca8130?t=1503553460000"
+          alt=""
+        />
+         <Link to="events" className="home__anchor">
+        <div className="page__title">
+          <h2>EVENTS</h2>
+        </div>
+      </Link>
+      </div>
+   
+      <div className="page__link">
+        <img
+          src="https://secure.meetupstatic.com/photos/event/7/7/c/5/highres_491130661.jpeg"
+          alt=""
+        />
+         <Link to="events" className="home__anchor">
+        <div className="page__title">
+          <h2>GROUPS</h2>
+        </div>
+        </Link>
+      </div>
+      <div className="page__link">
+        <img
+          src="https://www.pamburridge.com/images/home/surfing-lessons-mollymook-full.jpg"
+          alt=""
+        />
+         <Link to="events" className="home__anchor">
+        <div className="page__title">
+          <h2>CLASSES</h2>
+        </div>
+        </Link>
+      </div>
     </div>
   );
 }
