@@ -1,0 +1,40 @@
+.nav__main{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px black solid;
+    height: 40px;
+}
+
+.nav__left{
+    display: flex;
+    flex-direction: row;
+    width: 33%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-logo__center{
+    display: flex;
+    flex-direction: row;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav__right{
+    display: flex;
+    flex-direction: row;
+    width: 33%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-icon{
+    width: 30px;
+    height: 30px;
+    
+}
+
+.nav-icon  img{
+    width: 100%;
+}
