@@ -1,9 +1,12 @@
 import React from "react";
 import "./HeaderComponent.css";
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 function Header() {
+
+  const { isAuthenticated, loginWithRedirect, logoutWithRedirect } = useAuth0();
   return (
     <nav className="nav__main">
       <div className="nav__left">
@@ -14,7 +17,7 @@ function Header() {
         <div className="nav-logo"><Link to="/">LOGO</Link></div>
       </div>
       <div className="nav__right">
-        <div className="nav-explore nav-icon"><Link to="/explore"><img src="https://image.flaticon.com/icons/svg/684/684908.svg" alt="hamburguer-button"/></Link></div>
+        <div className="nav-explore nav-icon"><Link to="" onClick={() => loginWithRedirect()}><img src="https://image.flaticon.com/icons/svg/684/684908.svg" alt="hamburguer-button"/></Link></div>
         <div className="nav-user nav-icon"><Link to="/login"><img src="https://image.flaticon.com/icons/svg/3014/3014241.svg" alt="hamburguer-button"/></Link></div>
       </div>
     </nav>

@@ -1,0 +1,26 @@
+.username{
+    margin: 40px
+}
+
+.username > input:invalid{
+    background-color: rgb(184, 98, 98);
+    margin-left: 10px ;
+
+}
+
+.password > input:invalid{
+    background-color: rgb(184, 98, 98);
+    margin-left: 10px ;
+
+}
+
+.username > input:valid{
+    background-color: rgb(98, 184, 112);
+    margin-left: 20px ;
+}
+
+.password > input:valid{
+    background-color: rgb(98, 184, 112);
+    margin-left: 20px ;
+
+}

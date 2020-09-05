@@ -49,6 +49,7 @@ function EventItem({ id }) {
           <div className="details__left">
             <div className="info-start">
               <img
+
                 src="https://image.flaticon.com/icons/svg/1505/1505471.svg"
                 alt="start-flag"
               />

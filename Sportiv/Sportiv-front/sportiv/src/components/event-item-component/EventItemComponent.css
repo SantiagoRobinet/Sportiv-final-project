@@ -147,6 +147,10 @@ p {
 .info-participants {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 40px;
 }
 
 .info-participants {
@@ -299,5 +303,20 @@ p {
 
   .info-date {
     padding-bottom: 18px;
+  }
+
+  @media (min-width: 470px) {
+    .info-start > img {
+      margin: 5px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .details__right img {
+      width: 40px;
+      height: 40px;
+
+    }
+
   }
 }

@@ -9,8 +9,7 @@ import SearchPage from './components/search-page-component/SearchPageComponent';
 import Home from './components/home-component/HomePageComponent';
 import Explore from './components/explore-component/ExplorePageComponent';
 import Login from './components/login-component/LoginComponent';
-
-
+import Profile from './components/profile-component/ProfileComponent';
 function App() {
   return (
     <Router>
@@ -22,6 +21,8 @@ function App() {
           <Route path="/search"  component={SearchPage}/>
           <Route path="/explore"  component={Explore}/>
           <Route path="/login"  component={Login}/>
+          <Route path="/profile"  component={Profile}/>
+          {/* <AuthenticatedRoute  path="/people" component={People}/> */}
         </Switch>
         <Header />
     </Router>
