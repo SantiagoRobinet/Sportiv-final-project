@@ -11,6 +11,7 @@ const db = mongoose.connect('mongodb://localhost/sportivdatabase');
 const Event = require('./models/eventModel');
 const User = require('./models/userModel');
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -20,9 +21,8 @@ const eventRouter = require('./src/routes/eventsRouter')(Event);
 
 app.use('/api/events', eventRouter);
 
+const userRouter = require('./src/routes/usersRouter')(User);
 
-const userRouter = require('./src/routes/eventsRouter')(User);
-
-app.use('/api/users', userRouter);
+app.use('/api/user', userRouter);
 
 app.listen(port, debug(chalk.cyan(`The server is running on port :`, chalk.bgYellow(port))));

@@ -1,21 +1,24 @@
+const debug = require('debug')('app:userRoutesController');
 
-function eventsController(Event){
 
-    function get (req, res) {
-        const query = {};
-    
-        Event.find(query, (error, events) => {
-            if(error){
-                res.status(400);
-            } else {
-                res.status(200);
-                res.json(events);
-            }
-        })
+function usersRoutesController(User){
+
+    function post (req, res) {
+        const user = new User(req.body);
+        
+        debug(req.body)
+        if(!req.body) {
+            res.status(400);
+            res.send('user is required!');
+        } else {
+            user.save();
+
+            res.status(201);
+            res.json(user);
+        }
     }
-
     
-    return {get}
+    return { post }
 }
 
-module.exports = eventsController;
+module.exports = usersRoutesController;
