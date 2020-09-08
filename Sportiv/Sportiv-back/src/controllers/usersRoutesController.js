@@ -4,6 +4,7 @@ const debug = require('debug')('app:userRoutesController');
 function usersRoutesController(User){
 
     function post (req, res) {
+    
         const user = new User(req.body);
         
         debug(req.body)
@@ -12,7 +13,6 @@ function usersRoutesController(User){
             res.send('user is required!');
         } else {
             user.save();
-
             res.status(201);
             res.json(user);
         }
