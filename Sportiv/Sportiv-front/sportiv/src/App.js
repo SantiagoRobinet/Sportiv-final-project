@@ -8,9 +8,8 @@ import Header from './components/header-component/HeaderComponent';
 import SearchPage from './components/search-page-component/SearchPageComponent';
 import Home from './components/home-component/HomePageComponent';
 import Explore from './components/explore-component/ExplorePageComponent';
-import Login from './components/login-component/LoginComponent';
-
-
+import Profile from './components/profile-component/ProfileComponent';
+import Footer from './components/footer-component/FooterComponent';
 function App() {
   return (
     <Router>
@@ -21,9 +20,9 @@ function App() {
           <Route path="/events/:eventId"  component={EventDetail}/>
           <Route path="/search"  component={SearchPage}/>
           <Route path="/explore"  component={Explore}/>
-          <Route path="/login"  component={Login}/>
+          <Route path="/profile"  component={Profile}/>
         </Switch>
-        <Header />
+        <Footer />
     </Router>
    
   );
