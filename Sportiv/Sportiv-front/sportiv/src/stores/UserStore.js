@@ -2,8 +2,9 @@ import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 import actionTypes from '../actions/actionTypes';
 
+
 const CHANGE_EVENT = 'change';
-let _user = [];
+let _user = null;
 
 class UserStore extends EventEmitter {
 	addChangeListener(callback) {
@@ -18,7 +19,8 @@ class UserStore extends EventEmitter {
 		this.emit(CHANGE_EVENT);
 	}
 
-	getUser(){
+	getUser() {
+		console.log('>>>>>STOREEEEEE>>>> ',_user);
 		return _user;
 	}
 
@@ -30,7 +32,7 @@ dispatcher.register((action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_USER:
 			_user = action.data;
-			userStore.emitChange(_user);
+			userStore.emitChange();
 			break;
 		default:
 			break;

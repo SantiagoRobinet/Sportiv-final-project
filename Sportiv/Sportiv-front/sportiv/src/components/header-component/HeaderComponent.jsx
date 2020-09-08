@@ -8,7 +8,6 @@ function Header() {
 
   const { isAuthenticated, loginWithRedirect, logoutWithRedirect, user } = useAuth0();
 
-  console.log(user)
 
   return (
     <nav className="nav__main">
