@@ -1,37 +1,38 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./EventDetail.css";
-import eventStore from "../../stores/EventsStore";
-import { loadEvents } from "../../actions/EventDetailAction"; 
+import "./GroupDetailComponent.scss";
+import eventStore from "../../stores/GroupStore";
+import { loadGroups } from "../../actions/GroupActions"; 
+import groupStore from "../../stores/GroupStore";
 
-function EventDetail(props) {
-  console.log(props);
-  const [events, setEvents] = useState(eventStore.getEvents());
-  const [eventId, setEventId] = useState(props.match?.params?.eventId);
-  const [eventTitle, setEventTitle] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
-  const [eventStart, setEventStart] = useState("");
-  const [eventFinish, setEventFinish] = useState("");
-  const [eventParticipants, setEventParticipants] = useState("");
-  const [eventLevel, setEventLevel] = useState("");
+function GroupDetail(props) {
+
+  const [groups, setGroups] = useState(groupStore.getGroups());
+  const [eventId, setGroupId] = useState(props.match?.params?.eventId);
+  const [eventTitle, setGroupTitle] = useState("");
+  const [eventDate, setGroupDate] = useState("");
+  const [eventDescription, setGroupDescription] = useState("");
+  const [eventStart, setGroupStart] = useState("");
+  const [eventFinish, setGroupFinish] = useState("");
+  const [eventParticipants, setGroupParticipants] = useState("");
+  const [eventLevel, setGroupLevel] = useState("");
   const [eventPhoto, setPhoto] = useState("");
 
   useEffect(() => {
     eventStore.addChangeListener(onChange);
     if (events.length === 0) {
-      loadEvents();
+      loadGroups();
     } else if (eventId) {
-      const event = eventStore.getEventById(eventId);
+      const event = eventStore.getGroupById(eventId);
       if (event) {
-        setEventId(event._id);
-        setEventTitle(event.title);
-        setEventDate(event.date);
-        setEventDescription(event.description);
-        setEventStart(event.start);
-        setEventFinish(event.finish);
-        setEventParticipants(event.participants);
-        setEventLevel(event.level);
+        setGroupId(event._id);
+        setGroupTitle(event.title);
+        setGroupDate(event.date);
+        setGroupDescription(event.description);
+        setGroupStart(event.start);
+        setGroupFinish(event.finish);
+        setGroupParticipants(event.participants);
+        setGroupLevel(event.level);
         setPhoto(event.photo)
       }
     } else {
@@ -40,7 +41,7 @@ function EventDetail(props) {
   }, [events.length, props.match.params.eventId, eventId]);
 
   function onChange() {
-    setEvents(eventStore.getEvents());
+    setGroups(eventStore.getGroups());
   }
 
   return (
@@ -129,4 +130,4 @@ function EventDetail(props) {
   );
 }
 
-export default EventDetail;
+export default GroupDetail;

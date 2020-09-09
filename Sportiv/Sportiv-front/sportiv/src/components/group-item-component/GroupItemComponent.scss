@@ -32,27 +32,25 @@ li {
     flex-direction: row;
     height: 100%;
     align-items: center;
- 
   }
 
-  .group-detail__right{
-    justify-content: flex-end;
-
-  }
-
-  .group-detail__left{
+  .group-detail__right {
     justify-content: flex-end;
   }
 
-  .group-detail__right p{
-      font-size: 40px;
+  .group-detail__left {
+    justify-content: flex-end;
   }
 
-  .group-members{
-      justify-content: space-evenly;
+  .group-detail__right p {
+    font-size: 40px;
   }
-  
-  .join-button{
+
+  .group-members {
+    justify-content: space-evenly;
+  }
+
+  .join-button {
     text-decoration: none;
     background-color: #ecc08d;
     border-radius: 10px;
@@ -66,13 +64,19 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .join-button:hover {
+    background-color: #e4a55e;
+    color: white;
+    -webkit-box-shadow: -9px 5px 7px 0px rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: -9px 5px 7px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: -9px 5px 7px 0px rgba(0, 0, 0, 0.14);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  @media (min-width: 470px) {
+    .group-detail__info {
+      padding: 15px;
+    }
+  }
 }
-
-  @media (min-width: 470px){
-   .group-detail__info{
-       padding: 15px;
-   }
-
-   }
-}
-
