@@ -33,7 +33,7 @@ dispatcher.register((action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_EVENTS:
             _events = action.data;
-			eventStore.emitChange(_events);
+			eventStore.emitChange();
 			break;
 		default:
 			break;

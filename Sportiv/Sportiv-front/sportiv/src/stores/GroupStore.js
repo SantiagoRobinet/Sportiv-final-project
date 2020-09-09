@@ -2,11 +2,10 @@ import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher';
 import actionTypes from '../actions/actionTypes';
 
-
 const CHANGE_EVENT = 'change';
-let _user = null;
+let _groups = [];
 
-class UserStore extends EventEmitter {
+class GroupStore extends EventEmitter {
 	addChangeListener(callback) {
 		this.on(CHANGE_EVENT, callback);
 	}
@@ -19,27 +18,26 @@ class UserStore extends EventEmitter {
 		this.emit(CHANGE_EVENT);
 	}
 
-	getUser() {
-		return _user;
+	getGroups() {
+		return _groups;
 	}
 
+	getGroupById(id) {
+		return _groups.find((group) => group._id === id);
+	}
 }
 
-const userStore = new UserStore();
+const groupStore = new GroupStore();
 
 dispatcher.register((action) => {
 	switch (action.type) {
-		case actionTypes.LOAD_USER:
-			_user = action.data;
-			userStore.emitChange();
+		case actionTypes.LOAD_GROUPS:
+            _groups = action.data;
+			groupStore.emitChange();
 			break;
-		case actionTypes.CREATE_USER:
-			_user = action.data;
-			userStore.emitChange()
-		break
 		default:
 			break;
 	}
 });
 
-export default userStore;
+export default groupStore;

@@ -1,6 +1,6 @@
 
 .main-profile__container{
-    padding-top: 80px;
+    margin-top: 80px;
     flex: 1;
     height: 100vh;
     display: flex;
@@ -10,9 +10,9 @@
 
 .profile-photo{
     width:30%;
-    min-width: 214px;
-    max-width: 340px;
-    border-radius: 10%;
+    min-width: 260px;
+    max-width: 260px;
+    border-radius: 50%;
     padding-top: 10px;
     padding-bottom: 10px;
 }
