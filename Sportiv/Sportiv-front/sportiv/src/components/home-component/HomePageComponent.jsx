@@ -23,7 +23,7 @@ function Home() {
           src="https://secure.meetupstatic.com/photos/event/7/7/c/5/highres_491130661.jpeg"
           alt=""
         />
-         <Link to="events" className="home__anchor">
+         <Link to="groups" className="home__anchor">
         <div className="page__title">
           <h2>GROUPS</h2>
         </div>

@@ -25,6 +25,7 @@ xdescribe('Event Details Store', () => {
         eventStore.removeChangeListener(mockCallbackFunction);
     })
 
+    
     it('should call the callback function', () => {
         expect(mockCallbackFunction).toHaveBeenCalled();
         expect(mockCallbackFunction).toHaveBeenCalledTimes(1);

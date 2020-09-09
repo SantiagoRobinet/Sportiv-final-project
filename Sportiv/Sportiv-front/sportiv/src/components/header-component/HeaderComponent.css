@@ -51,6 +51,29 @@
 
 .nav-profile{
     border-radius: 50%;
+    width: 40px;
+}
+
+li{
+    width: 168px;
+}
+.MuiButtonBase-root{
+    width: 168px;
+}
+.MuiListItem-root{
+    width: 168px;
+}
+.MuiMenuItem-gutters{
+    width: 168px;
+}
+.MuiListItem-gutters{
+    width: 168px;
+}
+.MuiListItem-gutters{
+    width: 168px;
+}
+.MuiListItem-button{
+    width: 168px;
 }
 
 

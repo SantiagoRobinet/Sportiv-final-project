@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import eventStore from "../../stores/EventsStore";
-import "./EventItemComponent.css";
+import "./EventItemComponent.scss";
 
 function EventItem({ id }) {
   const [events, setEvents] = useState(eventStore.getEvents());

@@ -9,7 +9,9 @@ import SearchPage from './components/search-page-component/SearchPageComponent';
 import Home from './components/home-component/HomePageComponent';
 import Explore from './components/explore-component/ExplorePageComponent';
 import Profile from './components/profile-component/ProfileComponent';
-import Footer from './components/footer-component/FooterComponent';
+import GroupList from './components/groups-list-component/GroupListComponent';
+
+
 function App() {
   return (
     <Router>
@@ -18,11 +20,11 @@ function App() {
           <Route path="/" exact component={Home}/>
           <Route path="/events" exact component={EventsList}/>
           <Route path="/events/:eventId"  component={EventDetail}/>
+          <Route path="/groups"  component={GroupList}/>
           <Route path="/search"  component={SearchPage}/>
           <Route path="/explore"  component={Explore}/>
           <Route path="/profile"  component={Profile}/>
         </Switch>
-        <Footer />
     </Router>
    
   );

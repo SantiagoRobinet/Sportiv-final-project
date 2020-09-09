@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const userModel = new Schema ({
     authid: { type: String },
+    firstTime: { type: Boolean },
     userName: { type: String },
     firstName: { type: String },
     lastName: { type: String },
