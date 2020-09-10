@@ -8,7 +8,8 @@ const groupModel = new Schema (  {
     description: { type: String },
     members: { type: Number },
     category: { type: String },
-    events: [ String ]
+    events: [ String ],
+    membersId: [ String ]
   }
 )
 

@@ -26,7 +26,7 @@ const userRouter = require('./src/routes/usersRouter')(User);
 
 app.use('/api/user', userRouter);
 
-const groupRouter = require('./src/routes/groupsRouter')(Group);
+const groupRouter = require('./src/routes/groupsRouter')(Group, User);
 
 app.use('/api/groups', groupRouter);
 

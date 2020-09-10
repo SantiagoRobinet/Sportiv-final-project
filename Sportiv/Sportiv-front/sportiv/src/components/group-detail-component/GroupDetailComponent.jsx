@@ -1,10 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./GroupDetailComponent.scss";
-import { loadGroups } from "../../actions/GroupActions";
+import { loadGroups, memberJoin } from "../../actions/GroupActions";
 import groupStore from "../../stores/GroupStore";
+import { useAuth0 } from "@auth0/auth0-react";
+import userStore from "../../stores/UserStore";
+import { loadUser } from "../../actions/userActions";
 
 function GroupDetail(props) {
+  const { user, isAuthenticated } = useAuth0();
+
+  const [mongoUser, setMongoUser] = useState(userStore.getUser());
   const [groups, setGroups] = useState(groupStore.getGroups());
   const [groupId, setGroupId] = useState(props.match?.params?.groupId);
   const [groupTitle, setGroupTitle] = useState("");
@@ -12,11 +18,15 @@ function GroupDetail(props) {
   const [groupDescription, setGroupDescription] = useState("");
   const [groupCategory, setGroupCategory] = useState("");
   const [groupMembers, setGroupMembers] = useState("");
+  const [groupsList, setGroupsList] = useState([]);
+  const [isMember, setMember] = useState(null);
 
   useEffect(() => {
     groupStore.addChangeListener(onChange);
     if (groups.length === 0) {
-      loadGroups();
+      (async function loadAllGroups() {
+        await loadGroups();
+      })();
     } else if (groupId) {
       const group = groupStore.getGroupById(groupId);
       if (group) {
@@ -26,15 +36,34 @@ function GroupDetail(props) {
         setGroupDescription(group.description);
         setGroupMembers(group.members);
         setGroupCategory(group.category);
+        setGroupsList(group.membersId);
+      
       }
-      console.log(groupCategory);
     } else {
     }
     return () => groupStore.removeChangeListener(onChange);
-  }, [groups.length, props.match.params.groupId, groupId]);
+  }, [groups]);
+  console.log(">>>>>MONGOOOOOO SUEERERERERER>>>> ", mongoUser);
+
+  console.log(">>>>>>>IS MEMBEEEEEEERRRR", isMember);
 
   function onChange() {
     setGroups(groupStore.getGroups());
+
+    groupId && setGroupMembers(groupStore.getGroupMembers());
+  }
+
+  async function onSubmit(groupId, user) {
+     
+    (async function userLoading(){
+      await loadUser(user?.sub);
+      await setMongoUser(userStore.getUser());
+    }())
+    const toogleButton = mongoUser?.groups.some((item) => {
+      return item === groupId;
+    });
+    setMember(toogleButton);
+    memberJoin(groupId, user);
   }
 
   return (
@@ -53,20 +82,42 @@ function GroupDetail(props) {
           <div className="group-title">
             <h2>{groupTitle}</h2>
           </div>
-            <img src={groupPhoto} alt="group-photo" />
+          <img src={groupPhoto} alt="group-photo" />
         </div>
         <div className="group-info__container">
           <div className="group-description">
             <h3 className="group-description-title">Description</h3>
             <h4>{groupDescription}</h4>
           </div>
-          <div className="info-participants group-members">
-              <img
-                src="https://www.flaticon.es/premium-icon/icons/svg/3249/3249789.svg"
-                alt="participants-icon"
-              />
-              <p className="info-var">{groupMembers}</p>
+          <div>
+            <div className="group-inscription">
+              {!isAuthenticated && (
+                <h4>You Need to Login if you want to join the group..</h4>
+              )}
+              {isAuthenticated && !isMember && (
+                <div className="joinus-button__container">
+                  <button
+                    className="inscription__button"
+                    onClick={() => onSubmit(groupId, user)}
+                  >
+                    Join us!
+                  </button>
+                </div>
+              )}
+              {isAuthenticated && isMember && (
+                <div className="joinus-button__container">
+                  <button className="inscription__button">Leave NOW!</button>
+                </div>
+              )}
+              <div className="group-members">
+                <img
+                  src="https://www.flaticon.es/premium-icon/icons/svg/3249/3249789.svg"
+                  alt="participants-icon"
+                />
+                <p className="info-var">{groupMembers}</p>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </>

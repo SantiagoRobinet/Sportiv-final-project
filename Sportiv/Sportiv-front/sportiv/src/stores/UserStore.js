@@ -20,6 +20,7 @@ class UserStore extends EventEmitter {
 	}
 
 	getUser() {
+		console.log('>>>>> estoyyy ennn elll userrrrrr', _user)
 		return _user;
 	}
 

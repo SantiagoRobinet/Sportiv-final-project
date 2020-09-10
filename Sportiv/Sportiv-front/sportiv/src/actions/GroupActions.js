@@ -10,3 +10,14 @@ export function loadGroups() {
     })
 });
 }
+
+export function memberJoin(id,  user){
+
+  return axios.put(`/api/groups/${id}`, { user }).then((group) => {
+    
+  dispatcher.dispatch({
+      type: actionTypes.UPDATE_GROUP,
+      data: group.data
+    })
+  })
+}

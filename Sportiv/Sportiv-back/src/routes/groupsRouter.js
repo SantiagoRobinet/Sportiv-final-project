@@ -28,6 +28,7 @@ function routes(Group){
 
     groupsRouter.route('/:groupId')
     .get(idController.get)
+    .put(idController.put)
     
 
     return groupsRouter;
