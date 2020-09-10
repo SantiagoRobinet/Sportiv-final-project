@@ -10,6 +10,7 @@ import Home from './components/home-component/HomePageComponent';
 import Explore from './components/explore-component/ExplorePageComponent';
 import Profile from './components/profile-component/ProfileComponent';
 import GroupList from './components/groups-list-component/GroupListComponent';
+import GroupDetail from './components/group-detail-component/GroupDetailComponent';
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
           <Route path="/" exact component={Home}/>
           <Route path="/events" exact component={EventsList}/>
           <Route path="/events/:eventId"  component={EventDetail}/>
-          <Route path="/groups"  component={GroupList}/>
+          <Route path="/groups" exact  component={GroupList}/>
+          <Route path="/groups/:groupId"  component={GroupDetail}/>
           <Route path="/search"  component={SearchPage}/>
           <Route path="/explore"  component={Explore}/>
           <Route path="/profile"  component={Profile}/>

@@ -7,6 +7,7 @@ const groupModel = new Schema (  {
     photo: { type: String },
     description: { type: String },
     members: { type: Number },
+    category: { type: String },
     events: [ String ]
   }
 )
