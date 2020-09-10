@@ -11,11 +11,9 @@ function routes(User){
     .post(controller.post)
    
     userRouter.use('/:authid', (req,res,next)=> {
-        debug(req.params.authid);
        
         User.findOne({authid: req.params.authid}, (error, user) => {
-            debug(user)
-            
+                
             if(error) {
                 res.send(error)
                 res.status(404)

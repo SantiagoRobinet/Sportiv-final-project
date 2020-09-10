@@ -41,8 +41,8 @@ function GroupItem({ id }) {
         </div>
         <div className="details__info group-detail__info">
           <div className="details__left group-detail__left">
-            <Link to={`/events/${id}`} className="join-button">
-              Join
+            <Link to={`/groups/${id}`} className="join-button">
+              See More
             </Link>
           </div>
           <div className="details__right group-detail__right">
