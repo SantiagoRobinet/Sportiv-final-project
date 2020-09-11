@@ -1,6 +1,7 @@
 const debug = require("debug")("app:userRouterController");
 const User = require("../../models/userModel");
 const Group = require("../../models/groupModel");
+const { checkArr } = require("../helpers/groupHellper");
 
 const get = (req, res) => {
   const { group } = req;
@@ -21,14 +22,13 @@ const put = (req, res) => {
   let userUnicId = null;
 
   User.findOne({ authid: sub }, (error, user) => {
-      if (error) {
-          res.status(404);
-          res.send(error);
-        }
-        if (user) {
-            debug('aca estamooooooooosss')
+    if (error) {
+      res.status(404);
+      res.send(error);
+    }
+    if (user) {
       userUnicId = user._id;
-      user.groups.push(_id);
+      user.groups = checkArr(user.groups, _id);
       user.save();
     }
   });
@@ -39,9 +39,7 @@ const put = (req, res) => {
       res.send(error);
     }
     if (group) {
-      const addMember = group.members + 1;
-      group.members = addMember;
-      group.membersId.push(userUnicId);
+      group.membersId = checkArr(group.membersId, userUnicId)
       group.save();
       res.send(group);
     }

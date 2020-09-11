@@ -17,8 +17,8 @@ function GroupDetail(props) {
   const [groupPhoto, setGroupPhoto] = useState("");
   const [groupDescription, setGroupDescription] = useState("");
   const [groupCategory, setGroupCategory] = useState("");
-  const [groupMembers, setGroupMembers] = useState("");
   const [isMember, setMember] = useState(null);
+  const [membersArray, setMembersArr] = useState([]);
 
   useEffect(() => {
     groupStore.addChangeListener(onChange);
@@ -28,13 +28,14 @@ function GroupDetail(props) {
       })();
     } else if (groupId) {
       const group = groupStore.getGroupById(groupId);
+
       if (group) {
         setGroupId(group._id);
         setGroupTitle(group.title);
         setGroupPhoto(group.photo);
         setGroupDescription(group.description);
-        setGroupMembers(group.members);
         setGroupCategory(group.category);
+        setMembersArr(group.membersId.length);
         (async function userLoading() {
           await loadUser(user?.sub);
           setMongoUser(userStore.getUser());
@@ -44,19 +45,26 @@ function GroupDetail(props) {
           setMember(toogleButton);
         })();
       }
-    } else {
     }
     return () => groupStore.removeChangeListener(onChange);
   }, [groups]);
+  
 
   function onChange() {
     setGroups(groupStore.getGroups());
-
-    groupId && setGroupMembers(groupStore.getGroupMembers());
   }
 
-  async function onSubmit(groupId, user) {
-    memberJoin(groupId, user);
+  function onSubmit(groupId, user){
+    (async function userLoading() {
+      await loadUser(user?.sub);
+      setMongoUser(userStore.getUser());
+      const toogleButton = mongoUser?.groups.some((item) => {
+        return item === groupId;
+      });
+      setMember(toogleButton);
+      memberJoin(groupId, user)
+    })();
+
   }
 
   return (
@@ -91,7 +99,7 @@ function GroupDetail(props) {
                 <div className="joinus-button__container">
                   <button
                     className="inscription__button"
-                    onClick={() => onSubmit(groupId, user)}
+                    onClick={() => memberJoin(groupId, user)}
                   >
                     Join us!
                   </button>
@@ -101,7 +109,7 @@ function GroupDetail(props) {
                 <div className="joinus-button__container">
                   <button
                     className="inscription__button"
-                    onClick={() => onSubmit(groupId, user)}
+                    onClick={() => memberJoin(groupId, user)}
                   >
                     Leave NOW!
                   </button>
@@ -112,7 +120,7 @@ function GroupDetail(props) {
                   src="https://www.flaticon.es/premium-icon/icons/svg/3249/3249789.svg"
                   alt="participants-icon"
                 />
-                <p className="info-var">{groupMembers}</p>
+                <p className="info-var">{membersArray}</p>
               </div>
             </div>
           </div>

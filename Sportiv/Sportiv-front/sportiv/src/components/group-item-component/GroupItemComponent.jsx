@@ -7,7 +7,8 @@ function GroupItem({ id }) {
   const [groups, setGroups] = useState(groupStore.getGroups());
   const [actualGroupPhoto, setActualGroupPhoto] = useState("");
   const [actualGroupTitle, setActualGroupTitle] = useState("");
-  const [actualGroupMembers, setActualGroupMembers] = useState("");
+  const [membersArray, setMembersArr] = useState();
+
 
   useEffect(() => {
     groupStore.addChangeListener(onChange);
@@ -18,7 +19,7 @@ function GroupItem({ id }) {
       if (actualGroup) {
         setActualGroupTitle(actualGroup.title);
         setActualGroupPhoto(actualGroup.photo);
-        setActualGroupMembers(actualGroup.members);
+        setMembersArr(actualGroup.membersId.length)
       }
     }
     return () => {
@@ -51,7 +52,7 @@ function GroupItem({ id }) {
                 src="https://www.flaticon.es/premium-icon/icons/svg/3249/3249789.svg"
                 alt="participants-icon"
               />
-              <p className="info-var">{actualGroupMembers}</p>
+              <p className="info-var">{membersArray}</p>
             </div>
           </div>
         </div>
