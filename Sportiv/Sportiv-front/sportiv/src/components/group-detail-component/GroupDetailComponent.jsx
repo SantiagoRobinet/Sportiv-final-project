@@ -18,7 +18,6 @@ function GroupDetail(props) {
   const [groupDescription, setGroupDescription] = useState("");
   const [groupCategory, setGroupCategory] = useState("");
   const [groupMembers, setGroupMembers] = useState("");
-  const [groupsList, setGroupsList] = useState([]);
   const [isMember, setMember] = useState(null);
 
   useEffect(() => {
@@ -36,16 +35,19 @@ function GroupDetail(props) {
         setGroupDescription(group.description);
         setGroupMembers(group.members);
         setGroupCategory(group.category);
-        setGroupsList(group.membersId);
-      
+        (async function userLoading() {
+          await loadUser(user?.sub);
+          setMongoUser(userStore.getUser());
+          const toogleButton = mongoUser?.groups.some((item) => {
+            return item === groupId;
+          });
+          setMember(toogleButton);
+        })();
       }
     } else {
     }
     return () => groupStore.removeChangeListener(onChange);
   }, [groups]);
-  console.log(">>>>>MONGOOOOOO SUEERERERERER>>>> ", mongoUser);
-
-  console.log(">>>>>>>IS MEMBEEEEEEERRRR", isMember);
 
   function onChange() {
     setGroups(groupStore.getGroups());
@@ -54,15 +56,6 @@ function GroupDetail(props) {
   }
 
   async function onSubmit(groupId, user) {
-     
-    (async function userLoading(){
-      await loadUser(user?.sub);
-      await setMongoUser(userStore.getUser());
-    }())
-    const toogleButton = mongoUser?.groups.some((item) => {
-      return item === groupId;
-    });
-    setMember(toogleButton);
     memberJoin(groupId, user);
   }
 
@@ -106,7 +99,12 @@ function GroupDetail(props) {
               )}
               {isAuthenticated && isMember && (
                 <div className="joinus-button__container">
-                  <button className="inscription__button">Leave NOW!</button>
+                  <button
+                    className="inscription__button"
+                    onClick={() => onSubmit(groupId, user)}
+                  >
+                    Leave NOW!
+                  </button>
                 </div>
               )}
               <div className="group-members">
