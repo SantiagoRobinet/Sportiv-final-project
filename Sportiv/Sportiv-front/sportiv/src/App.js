@@ -11,7 +11,8 @@ import Explore from './components/explore-component/ExplorePageComponent';
 import Profile from './components/profile-component/ProfileComponent';
 import GroupList from './components/groups-list-component/GroupListComponent';
 import GroupDetail from './components/group-detail-component/GroupDetailComponent';
-
+import LessonsList from './components/lessons-list-component/LessonsListComponent'
+import LessonDetail from './components/lessons-details-component/LessonsDetailsComponent'
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
           <Route path="/events/:eventId"  component={EventDetail}/>
           <Route path="/groups" exact  component={GroupList}/>
           <Route path="/groups/:groupId"  component={GroupDetail}/>
+          <Route path="/lessons"  exact component={LessonsList}/>
+          <Route path="/lessons/:lessonId"  component={LessonDetail}/>
           <Route path="/search"  component={SearchPage}/>
           <Route path="/explore"  component={Explore}/>
           <Route path="/profile"  component={Profile}/>

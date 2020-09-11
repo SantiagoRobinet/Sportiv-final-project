@@ -3,10 +3,10 @@ import dispatcher from "../dispatcher";
 import actionTypes from "../actions/actionTypes";
 
 const CHANGE_EVENT = "change";
-let _groups = [];
-let _group = null;
+let _lessons = [];
+let _lesson = null;
 
-class GroupStore extends EventEmitter {
+class LessonsStore extends EventEmitter {
   addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   }
@@ -19,31 +19,26 @@ class GroupStore extends EventEmitter {
     this.emit(CHANGE_EVENT);
   }
 
-  getGroups() {
-    return _groups;
+  getLessons() {
+    return _lessons;
   }
 
-  getGroup() {
-    return _group;
+  getLesson() {
+    return _lesson;
   }
 
-  getGroupById(id) {
-    return _groups.find((group) => group._id === id);
+  getLessonById(id) {
+    return _lessons.find((lesson) => lesson._id === id);
   }
 }
 
-const groupStore = new GroupStore();
+const lessonsStore = new LessonsStore();
 
 dispatcher.register((action) => {
   switch (action.type) {
-    case actionTypes.LOAD_GROUPS:
-      _groups = action.data;
-      groupStore.emitChange();
-      break;
-
-    case actionTypes.UPDATE_GROUP:
-      _group = action.data;
-      groupStore.emitChange();
+    case actionTypes.LOAD_LESSONS:
+      _lessons = action.data;
+      lessonsStore.emitChange();
       break;
 
     default:
@@ -51,4 +46,4 @@ dispatcher.register((action) => {
   }
 });
 
-export default groupStore;
+export default lessonsStore;

@@ -5,7 +5,6 @@ import eventStore from "../../stores/EventsStore";
 import { loadEvents } from "../../actions/EventDetailAction"; 
 
 function EventDetail(props) {
-  console.log(props);
   const [events, setEvents] = useState(eventStore.getEvents());
   const [eventId, setEventId] = useState(props.match?.params?.eventId);
   const [eventTitle, setEventTitle] = useState("");

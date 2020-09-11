@@ -34,9 +34,9 @@ function Home() {
           src="https://www.pamburridge.com/images/home/surfing-lessons-mollymook-full.jpg"
           alt=""
         />
-         <Link to="events" className="home__anchor">
+         <Link to="lessons" className="home__anchor">
         <div className="page__title">
-          <h2>CLASSES</h2>
+          <h2>LESSONS</h2>
         </div>
         </Link>
       </div>
