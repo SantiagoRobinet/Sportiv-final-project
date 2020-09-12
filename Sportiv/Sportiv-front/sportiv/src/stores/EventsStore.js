@@ -4,6 +4,7 @@ import actionTypes from '../actions/actionTypes';
 
 const CHANGE_EVENT = 'change';
 let _events = [];
+let _event = null;
 
 class EventStore extends EventEmitter {
 	addChangeListener(callback) {
@@ -35,6 +36,12 @@ dispatcher.register((action) => {
             _events = action.data;
 			eventStore.emitChange();
 			break;
+
+		case actionTypes.CREATE_EVENT:
+            _event = action.data;
+			eventStore.emitChange();
+			break;
+			
 		default:
 			break;
 	}

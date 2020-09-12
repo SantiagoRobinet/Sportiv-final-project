@@ -34,10 +34,12 @@ dispatcher.register((action) => {
 			_user = action.data;
 			userStore.emitChange();
 			break;
+
 		case actionTypes.CREATE_USER:
 			_user = action.data;
 			userStore.emitChange()
-		break
+		break;
+		
 		default:
 			break;
 	}

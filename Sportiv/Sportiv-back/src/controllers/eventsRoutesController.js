@@ -1,5 +1,22 @@
+const debug = require('debug')('app:eventsRouterController');
+
 
 function eventsController(Event){
+
+
+    function post (req, res) {
+        debug(req.body);
+        const event = new Event(req.body);
+
+        if(!req.body){
+            res.status(400);
+            res.send('event is required');
+        } else {
+            event.save();
+            res.status(201);
+            res.json(event);
+        }
+    }
 
     function get (req, res) {
         const query = {};
@@ -13,7 +30,7 @@ function eventsController(Event){
             }
         })
     }
-    return {get}
+    return {get, post}
 }
 
 module.exports = eventsController;

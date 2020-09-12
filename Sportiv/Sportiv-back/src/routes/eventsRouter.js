@@ -9,6 +9,7 @@ function routes(Event){
     const controller = eventsRoutesController(Event);
     eventsRouter.route('/')
     .get(controller.get)
+    .post(controller.post)
 
     return eventsRouter;
 }

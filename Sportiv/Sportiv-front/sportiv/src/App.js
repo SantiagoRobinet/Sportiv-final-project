@@ -13,6 +13,7 @@ import GroupList from './components/groups-list-component/GroupListComponent';
 import GroupDetail from './components/group-detail-component/GroupDetailComponent';
 import LessonsList from './components/lessons-list-component/LessonsListComponent'
 import LessonDetail from './components/lessons-details-component/LessonsDetailsComponent'
+import EventForm from './components/event-form-component/EventFormComponent'
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="/groups/:groupId"  component={GroupDetail}/>
           <Route path="/lessons"  exact component={LessonsList}/>
           <Route path="/lessons/:lessonId"  component={LessonDetail}/>
-          <Route path="/search"  component={SearchPage}/>
+          <Route path="/eventform"  component={EventForm}/>
           <Route path="/explore"  component={Explore}/>
           <Route path="/profile"  component={Profile}/>
         </Switch>
