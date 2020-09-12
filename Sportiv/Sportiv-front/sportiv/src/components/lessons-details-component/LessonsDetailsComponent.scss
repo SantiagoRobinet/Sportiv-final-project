@@ -118,6 +118,7 @@
 
   .lesson-level, .lesson-price , .lesson-duration{
     text-align: center;
+    width: 33.33%;
   }
 
   .lesson-detail-buttons{
@@ -130,12 +131,14 @@
     height: 55px;
   }
 
+  .lesson-info__bottom{
+    display: flex;
+    flex-direction: column;
+  }
+
 }
 
 @media (min-width: 750px) {
-  .lesson-description-paragraph > p {
-    font-size: 20px;
-  }
 
   .lesson-detail__container {
     display: flex;
@@ -172,4 +175,19 @@
   .lesson-description-title > h3 {
     font-size: 28px;
   }
+
+  .specification-title__size{
+    font-size: 22px;
+  }
+ 
+  .lesson-detail__container p {
+    font-size: 20px;
+  }
+
+  .lesson-info__bottom{
+    height: 40%;
+    justify-content: space-between;
+  }
+
+ 
 }

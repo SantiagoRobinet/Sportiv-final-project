@@ -103,35 +103,37 @@ function LessonDetail(props) {
               <p>{lessonDescription}</p>
             </div>
           </div>
-          <div className="lesson-specifications">
-            <div className="lesson-level">
-              <h4>Level</h4>
-              <p>{lessonLevel}</p>
+          <div className="lesson-info__bottom">
+            <div className="lesson-specifications">
+              <div className="lesson-level">
+                <h4 className="specification-title__size">Level</h4>
+                <p className="specification-paragraph__size">{lessonLevel}</p>
+              </div>
+              <div className="lesson-price">
+                <h4 className="specification-title__size">Price</h4>
+                <p className="specification-paragraph__size">{lessonPrice}€</p>
+              </div>
+              <div className="lesson-duration">
+                <h4 className="specification-title__size">Duration</h4>
+                <p className="specification-paragraph__size">{lessonDuration} mins.</p>
+              </div>
             </div>
-            <div className="lesson-price">
-              <h4>Price</h4>
-              <p>{lessonPrice}€</p>
-            </div>
-            <div className="lesson-duration">
-              <h4>Duration</h4>
-              <p>{lessonDuration} mins.</p>
-            </div>
-          </div>
-          <div>
-            <div className="lesson-inscription">
-              {!isAuthenticated && (
-                <h4>You Need to Login if you want to book the lesson..</h4>
-              )}
-              {isAuthenticated && (
-                <div className="lesson-detail-buttons">
-                  <div className="lesson-button__container">
-                    <button className="inscription__button">Dates!</button>
+            <div>
+              <div className="lesson-inscription">
+                {!isAuthenticated && (
+                  <h4>You Need to Login if you want to book the lesson..</h4>
+                )}
+                {isAuthenticated && (
+                  <div className="lesson-detail-buttons">
+                    <div className="lesson-button__container">
+                      <button className="inscription__button">Dates!</button>
+                    </div>
+                    <div className="lesson-button__container">
+                      <button className="inscription__button">Book!</button>
+                    </div>
                   </div>
-                  <div className="lesson-button__container">
-                    <button className="inscription__button">Book!</button>
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>
