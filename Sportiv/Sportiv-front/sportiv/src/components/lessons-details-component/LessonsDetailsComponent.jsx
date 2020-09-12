@@ -5,7 +5,6 @@ import { loadLessons } from "../../actions/LessonAction";
 import lessonsStore from "../../stores/LessonsStore";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 function LessonDetail(props) {
   const { user, isAuthenticated } = useAuth0();
 
@@ -14,6 +13,10 @@ function LessonDetail(props) {
   const [lessonTitle, setLessonTitle] = useState("");
   const [lessonPhoto, setLessonPhoto] = useState("");
   const [lessonDescription, setLessonDescription] = useState("");
+  const [lessonLevel, setLessonLevel] = useState("");
+  const [lessonPrice, setLessonPrice] = useState("");
+  const [lessonDuration, setLessonDuration] = useState("");
+
   const [isBooked, setIsBooked] = useState(null);
 
   useEffect(() => {
@@ -30,11 +33,14 @@ function LessonDetail(props) {
         setLessonTitle(lesson.title);
         setLessonPhoto(lesson.photo);
         setLessonDescription(lesson.description);
+        setLessonLevel(lesson.level);
+        setLessonPrice(lesson.price);
+        setLessonDuration(lesson.duration);
         // (async function userLoading() {
         //   await loadUser(user?.sub);
         //   setMongoUser(userStore.getUser());
-        //   const toogleButton = mongoUser?.groups.some((item) => {
-        //     return item === groupId;
+        //   const toogleButton = mongoUser?.lessons.some((item) => {
+        //     return item === lessonId;
         //   });
         //   setMember(toogleButton);
         // })();
@@ -42,23 +48,22 @@ function LessonDetail(props) {
     }
     return () => lessonsStore.removeChangeListener(onChange);
   }, [lessons]);
-  
 
   function onChange() {
     setLessons(lessonsStore.getLessons());
   }
 
-//   function onSubmit(lessonId, user){
-//     (async function userLoading() {
-//       await loadUser(user?.sub);
-//       setMongoUser(userStore.getUser());
-//       const toogleButton = mongoUser?.groups.some((item) => {
-//         return item === groupId;
-//       });
-//       setMember(toogleButton);
-//       memberJoin(groupId, user)
-//     })();
-//   }
+  //   function onSubmit(lessonId, user){
+  //     (async function userLoading() {
+  //       await loadUser(user?.sub);
+  //       setMongoUser(userStore.getUser());
+  //       const toogleButton = mongoUser?.lessons.some((item) => {
+  //         return item === lessonId;
+  //       });
+  //       setMember(toogleButton);
+  //       memberJoin(lessonId, user)
+  //     })();
+  //   }
 
   return (
     <>
@@ -71,31 +76,60 @@ function LessonDetail(props) {
           <h1>LESSON</h1>
         </div>
       </div>
-      <div className="group-detail__container">
-        <div className="group-header__container">
-          <div className="group-title">
-            <h2>{lessonTitle}</h2>
+      <div className="lesson-detail__container">
+        <div className="lesson-detail__left">
+          <div className="lesson-header__container">
+            <div className="lesson-title">
+              <h2>{lessonTitle}</h2>
+            </div>
+            <img src={lessonPhoto} alt="lesson-photo" />
           </div>
-          <img src={lessonPhoto} alt="group-photo" />
+          <div className="map-title">
+            <h3>WHERE?</h3>
+          </div>
+          <div className="lesson-map">
+            <img
+              src="https://docs.microsoft.com/es-es/azure/azure-maps/media/migrate-google-maps-web-app/simple-google-map.png"
+              alt="lesson-map"
+            />
+          </div>
         </div>
-        <div className="group-info__container">
-          <div className="group-description">
-            <h3 className="group-description-title">Description</h3>
-            <h4>{lessonDescription}</h4>
+        <div className="lesson-info__container">
+          <div className="lesson-description__container">
+            <div className="lesson-description-title">
+              <h3>Description</h3>
+            </div>
+            <div className="lesson-description-paragraph">
+              <p>{lessonDescription}</p>
+            </div>
+          </div>
+          <div className="lesson-specifications">
+            <div className="lesson-level">
+              <h4>Level</h4>
+              <p>{lessonLevel}</p>
+            </div>
+            <div className="lesson-price">
+              <h4>Price</h4>
+              <p>{lessonPrice}€</p>
+            </div>
+            <div className="lesson-duration">
+              <h4>Duration</h4>
+              <p>{lessonDuration} mins.</p>
+            </div>
           </div>
           <div>
-            <div className="group-inscription">
+            <div className="lesson-inscription">
               {!isAuthenticated && (
-                <h4>You Need to Login if you want to book..</h4>
+                <h4>You Need to Login if you want to book the lesson..</h4>
               )}
               {isAuthenticated && (
-                <div className="joinus-button__container">
-                  <button
-                    className="inscription__button"
-                   
-                  >
-                    Book!
-                  </button>
+                <div className="lesson-detail-buttons">
+                  <div className="lesson-button__container">
+                    <button className="inscription__button">Dates!</button>
+                  </div>
+                  <div className="lesson-button__container">
+                    <button className="inscription__button">Book!</button>
+                  </div>
                 </div>
               )}
             </div>

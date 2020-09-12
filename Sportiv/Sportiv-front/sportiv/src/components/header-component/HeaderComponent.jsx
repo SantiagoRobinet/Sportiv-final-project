@@ -27,8 +27,8 @@ function Header() {
             </NavLink>
           </div>
           <div>
-            <NavLink className="nav-page" to="/events">
-              CLASSES
+            <NavLink className="nav-page" to="/lessons">
+              LESSONS
             </NavLink>
           </div>
         </div>
