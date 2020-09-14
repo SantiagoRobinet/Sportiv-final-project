@@ -47,3 +47,55 @@ export function createEvent(
       console.error(error);
     });
 }
+
+export function deleteEvent(id) {
+  return axios.delete(`/api/events/${id}`).then((eventResponse) => {
+    dispatcher.dispatch({
+      type: actionTypes.DELETE_EVENT,
+      data: eventResponse,
+    });
+  });
+}
+
+export function joinEvent(id,  user){
+  return axios.put(`/api/events/${id}`, { user }).then((event) => {
+  dispatcher.dispatch({
+      type: actionTypes.JOIN_EVENT,
+      data: event.data
+    })
+  })
+}
+
+
+
+// export function updateEvent(id,
+//   owner,
+//   photo,
+//   title,
+//   description,
+//   start,
+//   finish,
+//   date,
+//   location
+// ) {
+//   return axios
+//     .put(`/api/events/${id}`, {
+//       owner,
+//       photo,
+//       title,
+//       description,
+//       start,
+//       finish,
+//       date,
+//       location,
+//     })
+//     .then((eventResponse) => {
+//       dispatcher.dispatch({
+//         type: actionTypes.CREATE_EVENT,
+//         data: eventResponse.data,
+//       });
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }

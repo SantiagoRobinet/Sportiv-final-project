@@ -17,17 +17,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateEventForm() {
+export default function UpdateEventForm({ title, date, description, start, finish, photo }) {
   const { user , isAuthenticated} = useAuth0();
   
   const [mongoUser, setMongoUser] = useState("");
-  const [eventPhoto, setEventPhoto] = useState("");
-  const [eventTitle, setEventTitle] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
-  const [eventStartTime, setEventStartTime] = useState("");
-  const [eventFinishTime, setEventFinishTime] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [eventLocation, setEventLocation] = useState("");
+  const [eventPhoto, setEventPhoto] = useState(null);
+  const [eventTitle, setEventTitle] = useState(null);
+  const [eventDescription, setEventDescription] = useState(null);
+  const [eventStartTime, setEventStartTime] = useState(null);
+  const [eventFinishTime, setEventFinishTime] = useState(null);
+  const [eventDate, setEventDate] = useState(null);
+  const [eventLocation, setEventLocation] = useState("La Plata");
+  const [eventId, setEventId] = useState("5f5e1ad116cc813d30ddcbd7")
 
   const classes = useStyles();
 
@@ -48,8 +49,9 @@ export default function CreateEventForm() {
     setMongoUser(userStore.getUser());
   }
 
-  function onClickCreateEvent(
+  function onClickUpdateEvent(
     event,
+    eventId,
     owner,
     photo,
     title,
@@ -60,18 +62,17 @@ export default function CreateEventForm() {
     location
   ) {
     event.preventDefault();
-    createEvent(
-      owner,
-      photo,
-      title,
-      description,
-      startTime,
-      finishTime,
-      date,
-      location
-    );
-
-
+    // createEvent(
+    //     eventId,
+    //   owner,
+    //   photo,
+    //   title,
+    //   description,
+    //   startTime,
+    //   finishTime,
+    //   date,
+    //   location
+    // );
   }
 
   return (
@@ -81,7 +82,7 @@ export default function CreateEventForm() {
           required
           id="standard-basic"
           label="Photo URL"
-          value={eventPhoto}
+          value={eventPhoto || photo}
           error={eventPhoto === ''}
           onChange={(event) => {
             event.preventDefault();
@@ -93,7 +94,7 @@ export default function CreateEventForm() {
           id="standard-basic"
           label="Title"
           error={eventTitle === ''}
-          value={eventTitle}
+          value={eventTitle || title}
           onChange={(event) => {
             event.preventDefault();
             setEventTitle(event.target.value);
@@ -103,7 +104,7 @@ export default function CreateEventForm() {
           id="standard-textarea"
           label="Description"
           placeholder="Description here"
-          value={eventDescription}
+          value={eventDescription || description}
           error={eventDescription === ''}
           onChange={(event) => {
             event.preventDefault();
@@ -124,12 +125,12 @@ export default function CreateEventForm() {
         />
         <TextField
           required
-          value={eventDate}
+          value={eventDate || date}
           onChange={(event) => setEventDate(event.target.value)}
           id="date"
           label="Date"
           type="date"
-          defaultValue="2017-05-24"
+          defaultValue={eventDate}
           className={classes.textField}
           error={eventDate === ''}
           InputLabelProps={{
@@ -138,12 +139,11 @@ export default function CreateEventForm() {
         />
         <TextField
           required
-          value={eventStartTime}
+          value={eventStartTime || start}
           onChange={(event) => setEventStartTime(event.target.value)}
           id="time"
           label="Start Time"
           type="time"
-          defaultValue="07:30"
           className={classes.textField}
           error={eventStartTime === ''}
           InputLabelProps={{
@@ -155,12 +155,11 @@ export default function CreateEventForm() {
         />
         <TextField
           required
-          value={eventFinishTime}
+          value={eventFinishTime || finish}
           onChange={(event) => setEventFinishTime(event.target.value)}
           id="time"
           label="Finish Time"
           type="time"
-          defaultValue="19:30"
           className={classes.textField}
           error={eventFinishTime === ''}
           InputLabelProps={{
@@ -173,8 +172,9 @@ export default function CreateEventForm() {
         <button
           className="create-form-button"
           onClick={(event) =>
-            onClickCreateEvent(
+            onClickUpdateEvent(
               event,
+              eventId,
               mongoUser?._id,
               eventPhoto,
               eventTitle,
@@ -186,7 +186,7 @@ export default function CreateEventForm() {
             )
           }
         >
-          CREATE EVENT
+          UPDATE EVENT
         </button>
       </form>
     </>

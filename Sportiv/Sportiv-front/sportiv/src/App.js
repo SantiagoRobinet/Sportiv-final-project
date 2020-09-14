@@ -14,6 +14,7 @@ import GroupDetail from './components/group-detail-component/GroupDetailComponen
 import LessonsList from './components/lessons-list-component/LessonsListComponent'
 import LessonDetail from './components/lessons-details-component/LessonsDetailsComponent'
 import EventForm from './components/event-form-component/EventFormComponent'
+import UpdateeEventForm from './components/update-event-form-component/UpdateEventFormComponent'
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
           <Route path="/groups/:groupId"  component={GroupDetail}/>
           <Route path="/lessons"  exact component={LessonsList}/>
           <Route path="/lessons/:lessonId"  component={LessonDetail}/>
-          <Route path="/eventform"  component={EventForm}/>
+          <Route path="/event-form"  component={EventForm}/>
+          <Route path="/update-event-form"  component={UpdateeEventForm}/>
           <Route path="/explore"  component={Explore}/>
           <Route path="/profile"  component={Profile}/>
         </Switch>

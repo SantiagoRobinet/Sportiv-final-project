@@ -42,6 +42,16 @@ dispatcher.register((action) => {
 			eventStore.emitChange();
 			break;
 			
+		case actionTypes.DELETE_EVENT:
+            _events = _events.filter((element) => element !== action.data);
+			eventStore.emitChange();
+			break;
+			
+		case actionTypes.JOIN_EVENT:
+            _event = action.data;
+			eventStore.emitChange();
+			break;
+			
 		default:
 			break;
 	}

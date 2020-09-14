@@ -2,9 +2,19 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./EventDetail.css";
 import eventStore from "../../stores/EventsStore";
-import { loadEvents } from "../../actions/EventDetailAction"; 
+import {
+  loadEvents,
+  deleteEvent,
+  joinEvent,
+} from "../../actions/EventDetailAction";
+import { useAuth0 } from "@auth0/auth0-react";
+import { loadUser } from "../../actions/userActions";
+import userStore from "../../stores/UserStore";
+import UpdateEventForm from "../forms-material-UI-components/UpdateEventFormComponent";
 
 function EventDetail(props) {
+  const { user, isAuthenticated } = useAuth0();
+
   const [events, setEvents] = useState(eventStore.getEvents());
   const [eventId, setEventId] = useState(props.match?.params?.eventId);
   const [eventTitle, setEventTitle] = useState("");
@@ -13,11 +23,17 @@ function EventDetail(props) {
   const [eventStart, setEventStart] = useState("");
   const [eventFinish, setEventFinish] = useState("");
   const [eventParticipants, setEventParticipants] = useState("");
-  const [eventLevel, setEventLevel] = useState("");
   const [eventPhoto, setPhoto] = useState("");
+  const [isOwner, setIsOwner] = useState(false);
+  const [updateForm, setUpdateForm] = useState(false);
 
   useEffect(() => {
     eventStore.addChangeListener(onChange);
+    user &&
+      console.log(
+        "THIS IS THE EVEEEENNNTTTT IIDIIDIDIIDIDIIDIDIDIID",
+        user.sub
+      );
     if (events.length === 0) {
       loadEvents();
     } else if (eventId) {
@@ -29,18 +45,49 @@ function EventDetail(props) {
         setEventDescription(event.description);
         setEventStart(event.start);
         setEventFinish(event.finish);
-        setEventParticipants(event.participants);
-        setEventLevel(event.level);
-        setPhoto(event.photo)
+        setEventParticipants(event.participants.length);
+        setPhoto(event.photo);
+        (async function mongoUserLoad() {
+          await loadUser(user?.sub);
+          const mongoUser = userStore.getUser();
+          if (user) {
+            setIsOwner(
+              mongoUser.createdEvents.some((element) => element === eventId)
+            );
+          }
+        })();
       }
     } else {
     }
     return () => eventStore.removeChangeListener(onChange);
-  }, [events.length, props.match.params.eventId, eventId]);
+  }, [events.length, props.match.params.eventId, eventId, user]);
 
   function onChange() {
     setEvents(eventStore.getEvents());
   }
+
+  function onDelete(event, eventId) {
+    event.preventDefault();
+    deleteEvent(eventId);
+  }
+
+  function onSubmit(event, eventId, user) {
+    event.preventDefault();
+    joinEvent(eventId, user);
+  }
+
+  function showForm(event) {
+    event.preventDefault();
+    if (updateForm) {
+      setUpdateForm(false);
+    } else {
+      setUpdateForm(true);
+    }
+  }
+  // function onUpdate(event, eventId ){
+  //   event.preventDefault();
+  //   updateEvent(eventId);
+  // }
 
   return (
     <div className="desktop__container flex__column">
@@ -50,57 +97,74 @@ function EventDetail(props) {
       </div>
       <div className="main__container flex__column">
         <div className="desktop__container">
-        <div className="description__container">
-          <h2>Description</h2>
-          <p>{eventDescription}</p>
-        </div>
+          <div className="description__container">
+            <h2>Description</h2>
+            <p>{eventDescription}</p>
+          </div>
 
           <div className="info__container flex__row">
             <div className="start__section flex__row">
               <div className="start-flag">
-                  <img src="https://image.flaticon.com/icons/svg/1505/1505471.svg" alt=""/>
+                <img
+                  src="https://image.flaticon.com/icons/svg/1505/1505471.svg"
+                  alt=""
+                />
               </div>
               <div className="start-time flex__column">
-                  <div>
-                      <p>Start</p>
-                  </div>
-                  <div className="event-time">{eventStart}</div>
-
+                <div>
+                  <p>Start</p>
+                </div>
+                <div className="event-time">{eventStart}</div>
               </div>
             </div>
 
             <div className="flex__column">
-                  <div>
-                      <p>Date</p>
-                  </div>
-                  <div className="event-time">{eventDate}</div>
-
+              <div>
+                <p>Date</p>
               </div>
-            
-            <div className="start__section flex__row">
-              <div className="start-flag">
-                  <img src="https://image.flaticon.com/icons/svg/1505/1505471.svg" alt=""/>
-              </div>
-              <div className="start-time flex__column">
-                  <div>
-                      <p>Finish</p>
-                  </div>
-                  <div className="event-time">{eventFinish}</div>
-
-              </div>
+              <div className="event-time">{eventDate}</div>
             </div>
 
-
+            <div className="start__section flex__row">
+              <div className="start-flag">
+                <img
+                  src="https://image.flaticon.com/icons/svg/1505/1505471.svg"
+                  alt=""
+                />
+              </div>
+              <div className="start-time flex__column">
+                <div>
+                  <p>Finish</p>
+                </div>
+                <div className="event-time">{eventFinish}</div>
+              </div>
+            </div>
           </div>
           <div className="inscription__container flex__row">
-          <div className="flex__column">
-                  <div>
-                      <p>Level</p>
-                  </div>
-                  <div >{eventLevel}</div>
-
-              </div>
-            <button className="inscription__button">I'm in!</button>
+            {!isOwner && (
+              <button
+                className="inscription__button"
+                onClick={(event) => onSubmit(event, eventId, user)}
+              >
+                I'm in!
+              </button>
+            )}
+            {isOwner && (
+              <>
+                <button
+                  className="inscription__button"
+                  onClick={(event) => onDelete(event, eventId)}
+                >
+                  Delete
+                </button>
+                <button
+                  className="inscription__button"
+                  onClick={(event) => showForm(event)}
+                >
+                  Update
+                </button>
+              </>
+            )}
 
             <div className="counter flex__row">
               <div>
@@ -119,6 +183,18 @@ function EventDetail(props) {
             </div>
           </div>
         </div>
+        {updateForm && (
+          <div>
+            <UpdateEventForm
+              title={eventTitle}
+              date={eventDate}
+              description={eventDescription}
+              start={eventStart}
+              finish={eventFinish}
+              photo={eventPhoto}
+            />
+          </div>
+        )}
 
         <div className="map__container">
           <img src="https://image.maps.api.here.com/mia/1.6/mapview?app_id=3xJ1xva7Ad7VOciLEIFp&app_code=C8F-OpOoyjeG8Ke_Ed7w8A&poitxs=16&poitxc=white&poifc=red&poi=%2041.3910524,2.180644900000061&t=0&z=15&nodot&h=370&w=600&i" />

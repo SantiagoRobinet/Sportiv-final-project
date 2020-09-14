@@ -1,21 +1,29 @@
 const debug = require('debug')('app:eventsRouterController');
 
 
-function eventsController(Event){
+function eventsController(Event, User){
 
 
-    function post (req, res) {
+    async function post (req, res) {
         debug(req.body);
         const event = new Event(req.body);
+        const savedEvent = await event.save();
 
-        if(!req.body){
-            res.status(400);
-            res.send('event is required');
-        } else {
-            event.save();
-            res.status(201);
-            res.json(event);
-        }
+        User.findById(req.body.owner, (error, user) => {
+
+            if(error){
+                res.status(404);
+                res.send('ERROR');
+            }
+
+            if(user){
+                user.createdEvents.push(savedEvent._id);
+                res.json(user);
+                user.save()
+            }
+            
+        })
+
     }
 
     function get (req, res) {
