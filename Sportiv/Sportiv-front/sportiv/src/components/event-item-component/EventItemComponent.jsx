@@ -23,7 +23,7 @@ function EventItem({ id }) {
         setActualEventTitle(actualEvent.title);
         setActualEventStartTime(actualEvent.start);
         setActualEventDate(actualEvent.date);
-        setActualEventParticipants(actualEvent.participants);
+        setActualEventParticipants(actualEvent.participants.length);
         // setActualEventId(actualEvent._id);
       }
     }

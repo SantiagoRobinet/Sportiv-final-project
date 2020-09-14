@@ -11,7 +11,8 @@ const eventModel = new Schema ({
     participants: [ String ],
     owner: { type: String },
     photo: { type: String },
-    location: { type: String}
+    city:{ type: String },
+    street:{ type: String }
 })
 
 module.exports = mongoose.model('events', eventModel);

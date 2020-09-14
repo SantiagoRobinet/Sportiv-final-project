@@ -4,8 +4,9 @@ import TextField from "@material-ui/core/TextField";
 import { useAuth0 } from "@auth0/auth0-react";
 import { createEvent } from "../../actions/EventDetailAction";
 import { useEffect } from "react";
-import userStore from '../../stores/UserStore'
-import {loadUser} from '../../actions/userActions'
+import userStore from "../../stores/UserStore";
+import { loadUser } from "../../actions/userActions";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,33 +19,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CreateEventForm() {
-  const { user , isAuthenticated} = useAuth0();
-  
+  const history = useHistory();
+  const { user, isAuthenticated } = useAuth0();
+
   const [mongoUser, setMongoUser] = useState("");
   const [eventPhoto, setEventPhoto] = useState("");
-  const [eventTitle, setEventTitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventStartTime, setEventStartTime] = useState("");
   const [eventFinishTime, setEventFinishTime] = useState("");
   const [eventDate, setEventDate] = useState("");
-  const [eventLocation, setEventLocation] = useState("");
+  const [eventCity, setEventCity] = useState("");
+  const [eventStreet, setEventStreet] = useState("");
+  
 
   const classes = useStyles();
 
   useEffect(() => {
     userStore.addChangeListener(onChange);
 
-    if( isAuthenticated && !mongoUser){
-      (async function asyncLoad(){
+    if (isAuthenticated && !mongoUser) {
+      (async function asyncLoad() {
         await loadUser(user.sub);
         setMongoUser(userStore.getUser());
-      }())
+      })();
     }
 
-    return () => userStore.removeChangeListener(onChange)
-  })
+    return () => userStore.removeChangeListener(onChange);
+  });
 
-  function onChange(){
+  function onChange() {
     setMongoUser(userStore.getUser());
   }
 
@@ -57,21 +60,28 @@ export default function CreateEventForm() {
     startTime,
     finishTime,
     date,
-    location
+    city,
+    street
   ) {
-    event.preventDefault();
-    createEvent(
-      owner,
-      photo,
-      title,
-      description,
-      startTime,
-      finishTime,
-      date,
-      location
-    );
-
-
+    if( eventPhoto === '' || eventPhoto === '' || eventDescription === '' || eventStartTime === '' || eventFinishTime === '' || eventDate === '' || eventCity === '' || eventStreet === '' ){
+      alert('You need to complete all the fields to be able to create the event')
+      return falase;
+    } else {
+      alert('The event was created succesfuly')
+      event.preventDefault();
+      createEvent(
+        owner,
+        photo,
+        title,
+        description,
+        startTime,
+        finishTime,
+        date,
+        city,
+        street
+      );
+      history.push("/");
+    }
   }
 
   return (
@@ -82,7 +92,7 @@ export default function CreateEventForm() {
           id="standard-basic"
           label="Photo URL"
           value={eventPhoto}
-          error={eventPhoto === ''}
+          error={eventPhoto === ""}
           onChange={(event) => {
             event.preventDefault();
             setEventPhoto(event.target.value);
@@ -92,7 +102,7 @@ export default function CreateEventForm() {
           required
           id="standard-basic"
           label="Title"
-          error={eventTitle === ''}
+          error={eventTitle === ""}
           value={eventTitle}
           onChange={(event) => {
             event.preventDefault();
@@ -104,7 +114,7 @@ export default function CreateEventForm() {
           label="Description"
           placeholder="Description here"
           value={eventDescription}
-          error={eventDescription === ''}
+          error={eventDescription === ""}
           onChange={(event) => {
             event.preventDefault();
             setEventDescription(event.target.value);
@@ -114,12 +124,23 @@ export default function CreateEventForm() {
         <TextField
           required
           id="standard-basic"
-          label="Location"
-          value={eventLocation}
-          error={eventLocation === ''}
+          label="City"
+          value={eventCity}
+          error={eventCity === ""}
           onChange={(event) => {
             event.preventDefault();
-            setEventLocation(event.target.value);
+            setEventCity(event.target.value);
+          }}
+        />
+        <TextField
+          required
+          id="standard-basic"
+          label="Street"
+          value={eventStreet}
+          error={eventStreet === ""}
+          onChange={(event) => {
+            event.preventDefault();
+            setEventStreet(event.target.value);
           }}
         />
         <TextField
@@ -129,9 +150,8 @@ export default function CreateEventForm() {
           id="date"
           label="Date"
           type="date"
-          defaultValue="2017-05-24"
           className={classes.textField}
-          error={eventDate === ''}
+          error={eventDate === ""}
           InputLabelProps={{
             shrink: true,
           }}
@@ -143,9 +163,8 @@ export default function CreateEventForm() {
           id="time"
           label="Start Time"
           type="time"
-          defaultValue="07:30"
           className={classes.textField}
-          error={eventStartTime === ''}
+          error={eventStartTime === ""}
           InputLabelProps={{
             shrink: true,
           }}
@@ -160,9 +179,8 @@ export default function CreateEventForm() {
           id="time"
           label="Finish Time"
           type="time"
-          defaultValue="19:30"
           className={classes.textField}
-          error={eventFinishTime === ''}
+          error={eventFinishTime === ""}
           InputLabelProps={{
             shrink: true,
           }}
@@ -182,7 +200,8 @@ export default function CreateEventForm() {
               eventStartTime,
               eventFinishTime,
               eventDate,
-              eventLocation
+              eventCity,
+              eventStreet
             )
           }
         >

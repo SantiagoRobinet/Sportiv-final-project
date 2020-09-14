@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useAuth0 } from "@auth0/auth0-react";
-import { createEvent } from "../../actions/EventDetailAction";
+import { updateEvent } from "../../actions/EventDetailAction";
 import { useEffect } from "react";
-import userStore from '../../stores/UserStore'
-import {loadUser} from '../../actions/userActions'
+import userStore from "../../stores/UserStore";
+import { loadUser } from "../../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,35 +17,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UpdateEventForm({ title, date, description, start, finish, photo }) {
-  const { user , isAuthenticated} = useAuth0();
-  
+export default function UpdateEventForm({
+  title,
+  date,
+  description,
+  start,
+  finish,
+  photo,
+  eventId
+}) {
+  const { user, isAuthenticated } = useAuth0();
+
   const [mongoUser, setMongoUser] = useState("");
-  const [eventPhoto, setEventPhoto] = useState(null);
-  const [eventTitle, setEventTitle] = useState(null);
-  const [eventDescription, setEventDescription] = useState(null);
-  const [eventStartTime, setEventStartTime] = useState(null);
-  const [eventFinishTime, setEventFinishTime] = useState(null);
-  const [eventDate, setEventDate] = useState(null);
+  const [eventPhoto, setEventPhoto] = useState(photo);
+  const [eventTitle, setEventTitle] = useState(title);
+  const [eventDescription, setEventDescription] = useState(description);
+  const [eventStartTime, setEventStartTime] = useState(start);
+  const [eventFinishTime, setEventFinishTime] = useState(finish);
+  const [eventDate, setEventDate] = useState(date);
   const [eventLocation, setEventLocation] = useState("La Plata");
-  const [eventId, setEventId] = useState("5f5e1ad116cc813d30ddcbd7")
 
   const classes = useStyles();
 
   useEffect(() => {
     userStore.addChangeListener(onChange);
 
-    if( isAuthenticated && !mongoUser){
-      (async function asyncLoad(){
+    if (isAuthenticated && !mongoUser) {
+      (async function asyncLoad() {
         await loadUser(user.sub);
         setMongoUser(userStore.getUser());
-      }())
+      })();
     }
 
-    return () => userStore.removeChangeListener(onChange)
-  })
+    return () => userStore.removeChangeListener(onChange);
+  });
 
-  function onChange(){
+  function onChange() {
     setMongoUser(userStore.getUser());
   }
 
@@ -62,17 +69,18 @@ export default function UpdateEventForm({ title, date, description, start, finis
     location
   ) {
     event.preventDefault();
-    // createEvent(
-    //     eventId,
-    //   owner,
-    //   photo,
-    //   title,
-    //   description,
-    //   startTime,
-    //   finishTime,
-    //   date,
-    //   location
-    // );
+    console.log(eventId)
+    updateEvent(
+      eventId,
+      owner,
+      photo,
+      title,
+      description,
+      startTime,
+      finishTime,
+      date,
+      location
+    );
   }
 
   return (
@@ -82,8 +90,8 @@ export default function UpdateEventForm({ title, date, description, start, finis
           required
           id="standard-basic"
           label="Photo URL"
-          value={eventPhoto || photo}
-          error={eventPhoto === ''}
+          value={eventPhoto}
+          error={eventPhoto === ""}
           onChange={(event) => {
             event.preventDefault();
             setEventPhoto(event.target.value);
@@ -93,8 +101,8 @@ export default function UpdateEventForm({ title, date, description, start, finis
           required
           id="standard-basic"
           label="Title"
-          error={eventTitle === ''}
-          value={eventTitle || title}
+          error={eventTitle === ""}
+          value={eventTitle}
           onChange={(event) => {
             event.preventDefault();
             setEventTitle(event.target.value);
@@ -104,8 +112,8 @@ export default function UpdateEventForm({ title, date, description, start, finis
           id="standard-textarea"
           label="Description"
           placeholder="Description here"
-          value={eventDescription || description}
-          error={eventDescription === ''}
+          value={eventDescription}
+          error={eventDescription === ""}
           onChange={(event) => {
             event.preventDefault();
             setEventDescription(event.target.value);
@@ -117,7 +125,7 @@ export default function UpdateEventForm({ title, date, description, start, finis
           id="standard-basic"
           label="Location"
           value={eventLocation}
-          error={eventLocation === ''}
+          error={eventLocation === ""}
           onChange={(event) => {
             event.preventDefault();
             setEventLocation(event.target.value);
@@ -125,27 +133,26 @@ export default function UpdateEventForm({ title, date, description, start, finis
         />
         <TextField
           required
-          value={eventDate || date}
+          value={eventDate}
           onChange={(event) => setEventDate(event.target.value)}
           id="date"
           label="Date"
           type="date"
-          defaultValue={eventDate}
           className={classes.textField}
-          error={eventDate === ''}
+          error={eventDate === ""}
           InputLabelProps={{
             shrink: true,
           }}
         />
         <TextField
           required
-          value={eventStartTime || start}
+          value={eventStartTime}
           onChange={(event) => setEventStartTime(event.target.value)}
           id="time"
           label="Start Time"
           type="time"
           className={classes.textField}
-          error={eventStartTime === ''}
+          error={eventStartTime === ""}
           InputLabelProps={{
             shrink: true,
           }}
@@ -155,13 +162,13 @@ export default function UpdateEventForm({ title, date, description, start, finis
         />
         <TextField
           required
-          value={eventFinishTime || finish}
+          value={eventFinishTime}
           onChange={(event) => setEventFinishTime(event.target.value)}
           id="time"
           label="Finish Time"
           type="time"
           className={classes.textField}
-          error={eventFinishTime === ''}
+          error={eventFinishTime === ""}
           InputLabelProps={{
             shrink: true,
           }}

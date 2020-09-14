@@ -38,14 +38,12 @@ const deleter = ({ item }, res) => {
   }
 };
 
-
-
-const put = async function (req, res){
+const put = async function (req, res) {
   const { sub } = req.body.user;
-  const { _id } = req.item ;
+  const { _id } = req.item;
   let userUnicId = null;
 
- await User.findOne({ authid: sub }, (error, user) => {
+  await User.findOne({ authid: sub }, (error, user) => {
     if (error) {
       res.status(404);
       res.send(error);
@@ -58,54 +56,38 @@ const put = async function (req, res){
     }
   });
 
-  debug('ACA ESTA EL USER UNIC IDDDDDDD',userUnicId)
-  
-  
-  Event.findById(  _id  , (error, event) => {
+  Event.findById(_id, (error, event) => {
     if (error) {
       res.status(404);
       res.send(error);
     }
     if (event) {
-      debug('SOOOOUUUU ELL EVEEEEMEMMMMTTTTTT', event)
-      event.participants = checkArr(event.participants, userUnicId)
+      event.participants = checkArr(event.participants, userUnicId);
       event.save();
       res.send(event);
     }
   });
 };
 
+const patch = (req, res) => {
+  const { item } = req;
+  if (item) {
+    for (let i in req.body) {
+      item[i] = req.body[i];
+    }
 
+    item.save((error) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.json(item);
+      }
+    });
 
+    res.status(200);
+  } else {
+    res.status(404);
+  }
+};
 
-
-
-// const put = (req, res) => {
-//   const { event } = req;
-//   if (event) {
-//     //todas las propiedades a cambiar
-//     event.owner = req.body.owner
-//     event.photo = req.body.photo
-//     event.title = req.body.title
-//     event.description = req.body.description
-
-//     event.save((error) => {
-//       if (error) {
-//         res.send(error);
-//       } else {
-//         res.json(event);
-//       }
-//     });
-
-//     res.status(200);
-//   } else {
-//       res.status(404);
-//   }
-// };
-
-
-
-
-
-
-module.exports = { deleter, put };
+module.exports = { deleter, put, patch };

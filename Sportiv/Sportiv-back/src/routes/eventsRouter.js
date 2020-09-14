@@ -32,6 +32,7 @@ function routes(Event, User){
     eventsRouter.route('/:eventId')
     .delete(controllerId.deleter)
     .put(controllerId.put)
+    .patch(controllerId.patch);
     
 
     return eventsRouter;

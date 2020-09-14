@@ -24,10 +24,11 @@ export function createEvent(
   start,
   finish,
   date,
-  location
+  city,
+  street
 ) {
   return axios
-    .post("/api/events", {
+    .post(`/api/events`, {
       owner,
       photo,
       title,
@@ -35,7 +36,8 @@ export function createEvent(
       start,
       finish,
       date,
-      location,
+      city,
+      street,
     })
     .then((eventResponse) => {
       dispatcher.dispatch({
@@ -68,34 +70,34 @@ export function joinEvent(id,  user){
 
 
 
-// export function updateEvent(id,
-//   owner,
-//   photo,
-//   title,
-//   description,
-//   start,
-//   finish,
-//   date,
-//   location
-// ) {
-//   return axios
-//     .put(`/api/events/${id}`, {
-//       owner,
-//       photo,
-//       title,
-//       description,
-//       start,
-//       finish,
-//       date,
-//       location,
-//     })
-//     .then((eventResponse) => {
-//       dispatcher.dispatch({
-//         type: actionTypes.CREATE_EVENT,
-//         data: eventResponse.data,
-//       });
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
+export function updateEvent(eventId,
+  owner,
+  photo,
+  title,
+  description,
+  start,
+  finish,
+  date,
+  location
+) {
+  return axios
+    .patch(`/api/events/${eventId}`, {
+      owner,
+      photo,
+      title,
+      description,
+      start,
+      finish,
+      date,
+      location,
+    })
+    .then((eventResponse) => {
+      dispatcher.dispatch({
+        type: actionTypes.CREATE_EVENT,
+        data: eventResponse.data,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}

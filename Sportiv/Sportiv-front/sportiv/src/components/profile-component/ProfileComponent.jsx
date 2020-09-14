@@ -8,7 +8,7 @@ import "./ProfileComponent.css";
 import Loading from "../loading-component/LoadingComponent";
 
 function Profile() {
-  const { user, isAuthenticated, isLoading, logout } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

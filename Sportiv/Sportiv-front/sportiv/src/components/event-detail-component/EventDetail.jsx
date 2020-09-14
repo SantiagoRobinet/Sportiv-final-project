@@ -24,16 +24,14 @@ function EventDetail(props) {
   const [eventFinish, setEventFinish] = useState("");
   const [eventParticipants, setEventParticipants] = useState("");
   const [eventPhoto, setPhoto] = useState("");
+  const [eventCity, setCity] = useState("");
+  const [eventStreet, setStreet] = useState("");
+
   const [isOwner, setIsOwner] = useState(false);
   const [updateForm, setUpdateForm] = useState(false);
 
   useEffect(() => {
     eventStore.addChangeListener(onChange);
-    user &&
-      console.log(
-        "THIS IS THE EVEEEENNNTTTT IIDIIDIDIIDIDIIDIDIDIID",
-        user.sub
-      );
     if (events.length === 0) {
       loadEvents();
     } else if (eventId) {
@@ -47,6 +45,8 @@ function EventDetail(props) {
         setEventFinish(event.finish);
         setEventParticipants(event.participants.length);
         setPhoto(event.photo);
+        setCity(event.city);
+        setStreet(event.street);
         (async function mongoUserLoad() {
           await loadUser(user?.sub);
           const mongoUser = userStore.getUser();
@@ -97,6 +97,9 @@ function EventDetail(props) {
       </div>
       <div className="main__container flex__column">
         <div className="desktop__container">
+          <div>
+            <RenderMap city={eventCity} street={eventStreet} />
+          </div>
           <div className="description__container">
             <h2>Description</h2>
             <p>{eventDescription}</p>
@@ -192,6 +195,7 @@ function EventDetail(props) {
               start={eventStart}
               finish={eventFinish}
               photo={eventPhoto}
+              eventId={eventId}
             />
           </div>
         )}

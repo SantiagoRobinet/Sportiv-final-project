@@ -9,7 +9,7 @@ function reduceAction(action, state){
     }
 }
 
-xdescribe('Event Details Store', () => {
+describe('Event Details Store', () => {
     let action;
     let mockCallbackFunction;
 
