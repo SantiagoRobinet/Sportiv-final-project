@@ -4,7 +4,7 @@ import { useState } from "react";
 import { createUser, loadUser } from "../../actions/userActions";
 import { useEffect } from "react";
 import userStore from "../../stores/UserStore";
-import "./ProfileComponent.css";
+import "./ProfileComponent.scss";
 import Loading from "../loading-component/LoadingComponent";
 
 function Profile() {

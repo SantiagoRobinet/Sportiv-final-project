@@ -15,11 +15,6 @@ p {
   display: inline-block;
 }
 
-p {
-  font-size: 25px;
-  font-weight: bold;
-}
-
 .event-card__container {
   width: 100%;
   position: relative;
@@ -171,10 +166,6 @@ p {
 @media (min-width: 470px) {
   * {
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  p {
-    font-size: 2rem;
-    font-weight: bold;
   }
 
   .info-date > img {

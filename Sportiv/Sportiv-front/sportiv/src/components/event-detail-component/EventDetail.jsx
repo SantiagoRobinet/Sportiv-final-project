@@ -1,6 +1,7 @@
 import React from "react";
+import APImap from "../mapComponent/Map";
 import { useState, useEffect } from "react";
-import "./EventDetail.css";
+import "./EventDetail.scss";
 import eventStore from "../../stores/EventsStore";
 import {
   loadEvents,
@@ -97,12 +98,12 @@ function EventDetail(props) {
       </div>
       <div className="main__container flex__column">
         <div className="desktop__container">
-          <div>
-            <RenderMap city={eventCity} street={eventStreet} />
-          </div>
           <div className="description__container">
             <h2>Description</h2>
-            <p>{eventDescription}</p>
+            <div className='paragraph__container'>
+              <p>{eventDescription}</p>
+
+            </div>
           </div>
 
           <div className="info__container flex__row">
@@ -150,6 +151,14 @@ function EventDetail(props) {
                 onClick={(event) => onSubmit(event, eventId, user)}
               >
                 I'm in!
+              </button>
+            )}
+            {!isOwner && (
+              <button
+                className="inscription__button"
+                onClick={(event) => onSubmit(event, eventId, user)}
+              >
+                I'm out
               </button>
             )}
             {isOwner && (
@@ -200,9 +209,8 @@ function EventDetail(props) {
           </div>
         )}
 
-        <div className="map__container">
-          <img src="https://image.maps.api.here.com/mia/1.6/mapview?app_id=3xJ1xva7Ad7VOciLEIFp&app_code=C8F-OpOoyjeG8Ke_Ed7w8A&poitxs=16&poitxc=white&poifc=red&poi=%2041.3910524,2.180644900000061&t=0&z=15&nodot&h=370&w=600&i" />
-        </div>
+        <div className="map__container"></div>
+         <APImap city={eventCity} street={eventStreet} />
       </div>
     </div>
   );

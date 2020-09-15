@@ -24,6 +24,7 @@ export default function CreateEventForm() {
 
   const [mongoUser, setMongoUser] = useState("");
   const [eventPhoto, setEventPhoto] = useState("");
+  const [eventTitle, setEventTitle] = useState('')
   const [eventDescription, setEventDescription] = useState("");
   const [eventStartTime, setEventStartTime] = useState("");
   const [eventFinishTime, setEventFinishTime] = useState("");
@@ -65,7 +66,7 @@ export default function CreateEventForm() {
   ) {
     if( eventPhoto === '' || eventPhoto === '' || eventDescription === '' || eventStartTime === '' || eventFinishTime === '' || eventDate === '' || eventCity === '' || eventStreet === '' ){
       alert('You need to complete all the fields to be able to create the event')
-      return falase;
+      return false;
     } else {
       alert('The event was created succesfuly')
       event.preventDefault();

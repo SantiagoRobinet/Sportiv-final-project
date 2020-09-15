@@ -27,7 +27,6 @@ function EventsList() {
           src="https://www.coe.int/documents/24916852/0/Supporters3.jpg/63b405d6-be6d-d2ec-bd11-0f03c6ca8130?t=1503553460000"
           alt=""
         />
-
         <NavLink className="create-event-button" to="event-form">
           + EVENT
         </NavLink>

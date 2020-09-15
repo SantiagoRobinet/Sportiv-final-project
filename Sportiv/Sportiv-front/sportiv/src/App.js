@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom';
 import EventDetail from '../src/components/event-detail-component/EventDetail'
 import EventsList from '../src/components/events-list-component/EventsList'
 import Header from './components/header-component/HeaderComponent';
-import SearchPage from './components/search-page-component/SearchPageComponent';
 import Home from './components/home-component/HomePageComponent';
 import Profile from './components/profile-component/ProfileComponent';
 import GroupList from './components/groups-list-component/GroupListComponent';

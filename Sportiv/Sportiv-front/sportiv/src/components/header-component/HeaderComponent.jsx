@@ -1,5 +1,5 @@
 import React from "react";
-import "./HeaderComponent.css";
+import "./HeaderComponent.scss";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import SimpleMenu from "../desplegable-menu-component/DesplegableMenu";

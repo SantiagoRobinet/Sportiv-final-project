@@ -23,6 +23,10 @@ class UserStore extends EventEmitter {
 		return _user;
 	}
 
+	isSuscribed(eventId){
+		return _user?.events?.some((element) => element === eventId)
+	}
+
 }
 
 const userStore = new UserStore();
