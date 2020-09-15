@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 
 
-const eventRouter = require('./src/routes/eventsRouter')(Event);
+const eventRouter = require('./src/routes/eventsRouter')(Event, User);
 
 app.use('/api/events', eventRouter);
 

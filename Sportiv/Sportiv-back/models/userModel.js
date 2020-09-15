@@ -11,7 +11,10 @@ const userModel = new Schema ({
     email: { type: String },
     groups: [ String ],
     events: [ String ],
-    classes: [ String ]
+    classes: [ String ],
+    createdEvents: [ {type: mongoose.Schema.Types.ObjectId, ref: 'events'} ],
+    createdGroups: [ {type: mongoose.Schema.Types.ObjectId, ref: 'groups'} ],
+    createdLessons: [ {type: mongoose.Schema.Types.ObjectId, ref: 'lessons'} ]
 })
 
 module.exports = mongoose.model('users', userModel);

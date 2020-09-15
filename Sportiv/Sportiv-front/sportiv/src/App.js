@@ -5,14 +5,14 @@ import { Route, Switch } from 'react-router-dom';
 import EventDetail from '../src/components/event-detail-component/EventDetail'
 import EventsList from '../src/components/events-list-component/EventsList'
 import Header from './components/header-component/HeaderComponent';
-import SearchPage from './components/search-page-component/SearchPageComponent';
 import Home from './components/home-component/HomePageComponent';
-import Explore from './components/explore-component/ExplorePageComponent';
 import Profile from './components/profile-component/ProfileComponent';
 import GroupList from './components/groups-list-component/GroupListComponent';
 import GroupDetail from './components/group-detail-component/GroupDetailComponent';
 import LessonsList from './components/lessons-list-component/LessonsListComponent'
 import LessonDetail from './components/lessons-details-component/LessonsDetailsComponent'
+import EventForm from './components/event-form-component/EventFormComponent'
+import RenderMap from './components/mapComponent/MapComponent';
 
 function App() {
   return (
@@ -26,8 +26,8 @@ function App() {
           <Route path="/groups/:groupId"  component={GroupDetail}/>
           <Route path="/lessons"  exact component={LessonsList}/>
           <Route path="/lessons/:lessonId"  component={LessonDetail}/>
-          <Route path="/search"  component={SearchPage}/>
-          <Route path="/explore"  component={Explore}/>
+          <Route path="/event-form"  component={EventForm}/>
+          <Route path="/explore"  component={RenderMap}/>
           <Route path="/profile"  component={Profile}/>
         </Switch>
     </Router>
