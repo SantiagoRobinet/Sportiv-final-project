@@ -19,25 +19,34 @@ function EventDetail(props) {
   const { user } = useAuth0();
 
   const [localUser, setLocalUser] = useState(userStore.getUser());
-  const [isSubscribed, setIsSubscribed] = useState(
-    eventStore.isSubscribed(localUser?._id)
-  );
 
   const [event, setEvent] = useState(
     eventStore.getEventById(props.match.params.eventId)
   );
-
+  console.log(event);
+  // debugger;
   const [isOwner, setIsOwner] = useState(
     userStore.isEventOwner(props.match.params.eventId)
   );
   const [updateForm, setUpdateForm] = useState(false);
 
+  const [isSubscribed, setIsSubscribed] = useState(
+    eventStore.isSubscribed(localUser?._id)
+  );
+
+  useEffect(() => {
+    loadUser(user?.sub);
+  }, []);
+
   useEffect(() => {
     eventStore.addChangeListener(onChange);
     userStore.addChangeListener(onChange);
 
-    if (!event) loadEvent(props.match.params.eventId);
-    else if (!localUser) loadUser(user?.sub);
+    if (!event) {
+      loadEvent(props.match.params.eventId);
+    } else if (!localUser) {
+      loadUser(user?.sub);
+    }
 
     return () => {
       eventStore.removeChangeListener(onChange);
@@ -75,8 +84,7 @@ function EventDetail(props) {
 
   return (
     <>
-      {!event && <p>No event!</p>}
-      {event && (
+      {event ? (
         <div className="desktop__container flex__column">
           <div className="title__container flex__row">
             <img src={event.photo} />
@@ -222,6 +230,8 @@ function EventDetail(props) {
             </div>
           </div>
         </div>
+      ) : (
+        <p>No event!</p>
       )}
     </>
   );

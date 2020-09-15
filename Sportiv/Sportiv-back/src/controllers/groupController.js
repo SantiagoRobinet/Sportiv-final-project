@@ -8,7 +8,6 @@ const get = (req, res) => {
 
   if (group) {
     res.status(200);
-    debug(group);
     res.json(group);
   } else {
     res.status(404);
@@ -16,7 +15,6 @@ const get = (req, res) => {
 };
 
 const put = (req, res) => {
-  debug(req.group[0]._id);
   const { sub } = req.body.user;
   const { _id } = req.group[0];
   let userUnicId = null;
@@ -39,7 +37,7 @@ const put = (req, res) => {
       res.send(error);
     }
     if (group) {
-      group.membersId = checkArr(group.membersId, userUnicId)
+      group.membersId = checkArr(group.membersId, userUnicId);
       group.save();
       res.send(group);
     }

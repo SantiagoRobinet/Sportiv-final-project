@@ -32,6 +32,7 @@ class EventStore extends EventEmitter {
   }
 
   isSubscribed(userId) {
+    debugger;
     return _event?.participants.some(
       (participant) => participant === userId || participant._id === userId
     );
