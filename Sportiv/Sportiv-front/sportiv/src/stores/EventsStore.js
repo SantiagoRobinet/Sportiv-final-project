@@ -23,8 +23,18 @@ class EventStore extends EventEmitter {
     return _events;
   }
 
+  getEvent() {
+    return _event;
+  }
+
   getEventById(id) {
     return _events.find((event) => event._id === id);
+  }
+
+  isSubscribed(userId) {
+    return _event?.participants.some(
+      (participant) => participant === userId || participant._id === userId
+    );
   }
 }
 
@@ -34,6 +44,10 @@ dispatcher.register((action) => {
   switch (action.type) {
     case actionTypes.LOAD_EVENTS:
       _events = action.data;
+      eventStore.emitChange();
+      break;
+    case actionTypes.LOAD_EVENT:
+      _event = action.data;
       eventStore.emitChange();
       break;
 

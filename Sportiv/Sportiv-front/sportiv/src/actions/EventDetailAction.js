@@ -16,6 +16,20 @@ export function loadEvents() {
     });
 }
 
+export function loadEvent(eventId) {
+  return axios
+    .get(`/api/events/${eventId}`)
+    .then((event) => {
+      dispatcher.dispatch({
+        type: actionTypes.LOAD_EVENT,
+        data: event.data,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 export function createEvent(
   owner,
   photo,
@@ -59,18 +73,17 @@ export function deleteEvent(id) {
   });
 }
 
-export function joinEvent(id,  user){
+export function joinEvent(id, user) {
   return axios.put(`/api/events/${id}`, { user }).then((event) => {
-  dispatcher.dispatch({
+    dispatcher.dispatch({
       type: actionTypes.JOIN_EVENT,
-      data: event.data
-    })
-  })
+      data: event.data,
+    });
+  });
 }
 
-
-
-export function updateEvent(eventId,
+export function updateEvent(
+  eventId,
   owner,
   photo,
   title,

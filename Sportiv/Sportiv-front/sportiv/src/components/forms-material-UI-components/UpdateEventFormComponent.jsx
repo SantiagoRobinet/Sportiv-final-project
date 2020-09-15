@@ -24,7 +24,9 @@ export default function UpdateEventForm({
   start,
   finish,
   photo,
-  eventId
+  eventId,
+  city,
+  street,
 }) {
   const { user, isAuthenticated } = useAuth0();
 
@@ -35,7 +37,8 @@ export default function UpdateEventForm({
   const [eventStartTime, setEventStartTime] = useState(start);
   const [eventFinishTime, setEventFinishTime] = useState(finish);
   const [eventDate, setEventDate] = useState(date);
-  const [eventLocation, setEventLocation] = useState("La Plata");
+  const [eventCity, setEventCity] = useState(city);
+  const [eventStreet, setEventStreet] = useState(street);
 
   const classes = useStyles();
 
@@ -65,11 +68,11 @@ export default function UpdateEventForm({
     description,
     startTime,
     finishTime,
-    date,
-    location
+    city,
+    street
   ) {
     event.preventDefault();
-    console.log(eventId)
+    console.log(eventId);
     updateEvent(
       eventId,
       owner,
@@ -79,13 +82,19 @@ export default function UpdateEventForm({
       startTime,
       finishTime,
       date,
-      location
+      city,
+      street
     );
   }
 
   return (
     <>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        className="update-form"
+      >
         <TextField
           required
           id="standard-basic"
@@ -123,12 +132,23 @@ export default function UpdateEventForm({
         <TextField
           required
           id="standard-basic"
-          label="Location"
-          value={eventLocation}
-          error={eventLocation === ""}
+          label="City"
+          value={eventCity}
+          error={eventCity === ""}
           onChange={(event) => {
             event.preventDefault();
-            setEventLocation(event.target.value);
+            setEventCity(event.target.value);
+          }}
+        />
+        <TextField
+          required
+          id="standard-basic"
+          label="Street"
+          value={eventStreet}
+          error={eventStreet === ""}
+          onChange={(event) => {
+            event.preventDefault();
+            setEventStreet(event.target.value);
           }}
         />
         <TextField
@@ -177,7 +197,7 @@ export default function UpdateEventForm({
           }}
         />
         <button
-          className="create-form-button"
+          className="update-form-button"
           onClick={(event) =>
             onClickUpdateEvent(
               event,
@@ -189,7 +209,8 @@ export default function UpdateEventForm({
               eventStartTime,
               eventFinishTime,
               eventDate,
-              eventLocation
+              eventCity,
+              eventStreet
             )
           }
         >

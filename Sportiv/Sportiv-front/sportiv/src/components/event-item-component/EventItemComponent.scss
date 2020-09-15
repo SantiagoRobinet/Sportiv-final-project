@@ -156,7 +156,7 @@ p {
 }
 
 .details-title > h2 {
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .variable {
@@ -186,23 +186,22 @@ p {
   }
 
   .details-title > h2 {
-    font-size: 40px;
+    font-size: 30px;
   }
   .details-title {
-    padding-bottom: 20%;
+    padding-bottom: 10%;
   }
 }
 
 @media screen and (min-width: 730px) {
   li {
     display: flex;
-    
+
     width: 30%;
     min-width: 283px;
     max-width: 380px;
     margin: 20px;
     border-radius: 7px;
-
   }
 
   li:hover {
@@ -254,7 +253,6 @@ p {
     flex-direction: column;
     width: 50%;
     justify-content: space-between;
-
   }
 
   .details__right {
@@ -306,8 +304,6 @@ p {
     .details__right img {
       width: 40px;
       height: 40px;
-
     }
-
   }
 }

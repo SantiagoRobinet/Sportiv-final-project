@@ -90,4 +90,9 @@ const patch = (req, res) => {
   }
 };
 
-module.exports = { deleter, put, patch };
+const get = (req, res) => {
+  console.log("======================================", req.item);
+  res.json(req.item);
+};
+
+module.exports = { get, deleter, put, patch };

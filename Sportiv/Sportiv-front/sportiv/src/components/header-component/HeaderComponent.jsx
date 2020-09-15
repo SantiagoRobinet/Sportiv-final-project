@@ -5,12 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SimpleMenu from "../desplegable-menu-component/DesplegableMenu";
 
 function Header() {
-  const {
-    isAuthenticated,
-    loginWithRedirect,
-    logoutWithRedirect,
-    user,
-  } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   return (
     <nav className="nav__main">
@@ -38,29 +33,22 @@ function Header() {
             alt="hamburguer-button"
           />
         </div>
-        {/* <div className="nav-search nav-icon"><NavLink to="/search"><img src="https://image.flaticon.com/icons/svg/751/751463.svg" alt="hamburguer-button"/></NavLink></div> */}
       </div>
       <div className="nav-logo__center">
         <div className="nav-logo">
-          <NavLink to="/">LOGO</NavLink>
+          <NavLink to="/" className="logo__link">
+            <span className="s-logo">S</span>
+            <span className="portiv-logo">portiv</span>
+          </NavLink>
         </div>
       </div>
       <div className="nav__right">
-        <div className="nav-explore nav-icon">
-          <NavLink to="">
-            <img
-              src="https://trello-attachments.s3.amazonaws.com/5f49077bed9e41726a6d5d2f/5f4919754c61df879cbc5ac7/20aa55b3605d5f7e5485e5ad620c2c83/ubicacion.svg"
-              alt="explore-button"
-            />
-          </NavLink>
-        </div>
-
         {isAuthenticated && <SimpleMenu />}
         {!isAuthenticated && (
           <div className="nav-user nav-icon">
             <NavLink to="" onClick={() => loginWithRedirect()}>
               <img
-                src="https://trello-attachments.s3.amazonaws.com/5f49077bed9e41726a6d5d2f/5f4919754c61df879cbc5ac7/8887989c429433020441692c4a51dc86/iniciar-sesion.svg"
+                src="https://trello-attachments.s3.amazonaws.com/5f49077bed9e41726a6d5d2f/5f4919754c61df879cbc5ac7/cfa6eb0611aaae8bfe45d3b4dc467cce/usuario.svg"
                 alt="login-button"
               />
             </NavLink>
