@@ -23,6 +23,14 @@ class EventStore extends EventEmitter {
     return _events;
   }
 
+  setEvents(data) {
+    _events = data;
+  }
+
+  setEvent(data) {
+    _event = data;
+  }
+
   getEvent() {
     return _event;
   }
@@ -32,7 +40,6 @@ class EventStore extends EventEmitter {
   }
 
   isSubscribed(userId) {
-    debugger;
     return (
       _event &&
       _event.participants &&
@@ -63,6 +70,7 @@ dispatcher.register((action) => {
       break;
 
     case actionTypes.DELETE_EVENT:
+      console.log(action.data);
       _events = _events.filter((element) => element !== action.data);
       eventStore.emitChange();
       break;

@@ -91,7 +91,8 @@ export function updateEvent(
   start,
   finish,
   date,
-  location
+  city,
+  street
 ) {
   return axios
     .patch(`/api/events/${eventId}`, {
@@ -102,7 +103,8 @@ export function updateEvent(
       start,
       finish,
       date,
-      location,
+      city,
+      street,
     })
     .then((eventResponse) => {
       dispatcher.dispatch({

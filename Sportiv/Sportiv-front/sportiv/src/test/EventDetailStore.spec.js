@@ -46,12 +46,12 @@ describe("Event Details Store", () => {
 
   it("should return an object when find a match", () => {
     action = reduceAction(actionTypes.LOAD_EVENTS, [
-      { id: 1, title: "Longboard" },
-      { id: 2, title: "Longboard" },
-      { id: 3, title: "Longboard" },
+      { _id: 1, title: "Longboard" },
+      { _id: 2, title: "Longboard" },
+      { _id: 3, title: "Longboard" },
     ]);
     dispatcher.dispatch(action);
-    expect(eventStore.getEventById(1)).toEqual({ id: 1, title: "Longboard" });
+    expect(eventStore.getEventById(1)).toEqual({ _id: 1, title: "Longboard" });
   });
 
   it("should use de default case when the action type does not exist", () => {
@@ -69,7 +69,7 @@ describe("Event Details Store", () => {
     dispatcher.dispatch(action);
   });
 
-  it("should return an object when find a match", () => {
+  it("should create event", () => {
     action = reduceAction(actionTypes.CREATE_EVENT, {
       id: 1,
       title: "Longboard",
@@ -79,5 +79,72 @@ describe("Event Details Store", () => {
       id: 1,
       title: "Longboard",
     });
+  });
+
+  it("should register delete event", () => {
+    const expectedResult = [
+      {
+        _id: 2,
+        title: "Longboard",
+      },
+      {
+        _id: 3,
+        title: "Longboard",
+      },
+    ];
+
+    eventStore.setEvents([
+      {
+        _id: 1,
+        title: "Longboard",
+      },
+      {
+        _id: 2,
+        title: "Longboard",
+      },
+      {
+        _id: 3,
+        title: "Longboard",
+      },
+    ]);
+    action = reduceAction(actionTypes.DELETE_EVENT, {
+      _id: 1,
+      title: "Longboard",
+    });
+    dispatcher.dispatch(action);
+    expect(eventStore.getEvents()).toBeTruthy();
+  });
+
+  it("should join event", () => {
+    action = reduceAction(actionTypes.JOIN_EVENT, {
+      id: 1,
+      title: "Longboard",
+    });
+    dispatcher.dispatch(action);
+
+    expect(eventStore.getEvent()).toEqual({
+      id: 1,
+      title: "Longboard",
+    });
+  });
+
+  it("should update event", () => {
+    action = reduceAction(actionTypes.UPDATE_EVENT, {
+      id: 1,
+      title: "Longboard",
+    });
+    dispatcher.dispatch(action);
+
+    expect(eventStore.getEvent()).toEqual({
+      id: 1,
+      title: "Longboard",
+    });
+  });
+
+  it("should test is suscribed event", () => {
+    const eventData = { participants: [{ _id: "123" }] };
+    eventStore.setEvent(eventData);
+    const response = eventStore.isSubscribed("123");
+    expect(response).toEqual(true);
   });
 });

@@ -23,8 +23,7 @@ function EventDetail(props) {
   const [event, setEvent] = useState(
     eventStore.getEventById(props.match.params.eventId)
   );
-  console.log(event);
-  // debugger;
+
   const [isOwner, setIsOwner] = useState(
     userStore.isEventOwner(props.match.params.eventId)
   );
