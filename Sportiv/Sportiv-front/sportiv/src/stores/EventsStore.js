@@ -33,8 +33,12 @@ class EventStore extends EventEmitter {
 
   isSubscribed(userId) {
     debugger;
-    return _event?.participants.some(
-      (participant) => participant === userId || participant._id === userId
+    return (
+      _event &&
+      _event.participants &&
+      _event.participants.some(
+        (participant) => participant === userId || participant._id === userId
+      )
     );
   }
 }
@@ -44,6 +48,7 @@ const eventStore = new EventStore();
 dispatcher.register((action) => {
   switch (action.type) {
     case actionTypes.LOAD_EVENTS:
+      _event = null;
       _events = action.data;
       eventStore.emitChange();
       break;
