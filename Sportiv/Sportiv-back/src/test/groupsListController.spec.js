@@ -44,7 +44,7 @@ describe("GROUPS ROUTER CONTROLLER", () => {
     expect(statusSpy.calledWith(200)).to.be.true;
   });
 
-  it("should return status 200", () => {
+  it("should return a list of groups", () => {
     const groups = true;
     const Group = {
       find: (query, callback) => {

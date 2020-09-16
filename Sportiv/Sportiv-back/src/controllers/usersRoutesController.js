@@ -2,13 +2,12 @@ const debug = require("debug")("app:userRoutesController");
 
 function usersRoutesController(User) {
   function post(req, res) {
-    const query = req.body.authid;
-    const user = new User(req.body);
-
     if (!req.body) {
       res.status(400);
       res.send("user is required!");
     } else {
+      const query = req.body.authid;
+      const user = new User(req.body);
       User.findOne({ authid: query }, (error, foundedUser) => {
         if (error) {
           res.status(404);
