@@ -4,7 +4,6 @@ import actionTypes from "../actions/actionTypes";
 
 const CHANGE_EVENT = "change";
 let _lessons = [];
-let _lesson = null;
 
 class LessonsStore extends EventEmitter {
   addChangeListener(callback) {
@@ -21,14 +20,6 @@ class LessonsStore extends EventEmitter {
 
   getLessons() {
     return _lessons;
-  }
-
-  getLesson() {
-    return _lesson;
-  }
-
-  getLessonById(id) {
-    return _lessons.find((lesson) => lesson._id === id);
   }
 }
 
