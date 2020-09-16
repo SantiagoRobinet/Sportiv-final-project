@@ -23,6 +23,14 @@ class EventStore extends EventEmitter {
     return _events;
   }
 
+  setEvents(data) {
+    _events = data;
+  }
+
+  setEvent(data) {
+    _event = data;
+  }
+
   getEvent() {
     return _event;
   }
@@ -32,8 +40,12 @@ class EventStore extends EventEmitter {
   }
 
   isSubscribed(userId) {
-    return _event?.participants.some(
-      (participant) => participant === userId || participant._id === userId
+    return (
+      _event &&
+      _event.participants &&
+      _event.participants.some(
+        (participant) => participant === userId || participant._id === userId
+      )
     );
   }
 }
@@ -43,6 +55,7 @@ const eventStore = new EventStore();
 dispatcher.register((action) => {
   switch (action.type) {
     case actionTypes.LOAD_EVENTS:
+      _event = null;
       _events = action.data;
       eventStore.emitChange();
       break;
@@ -57,6 +70,7 @@ dispatcher.register((action) => {
       break;
 
     case actionTypes.DELETE_EVENT:
+      console.log(action.data);
       _events = _events.filter((element) => element !== action.data);
       eventStore.emitChange();
       break;

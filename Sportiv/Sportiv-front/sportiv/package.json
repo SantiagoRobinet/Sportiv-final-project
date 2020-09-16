@@ -33,7 +33,15 @@
         "functions": 80,
         "lines": 80
       }
-    }
+    },
+    "coveragePathIgnorePatterns": [
+      "src/groupmock",
+      "src/index",
+      "src/serviceWorker",
+      "src/dispatcher",
+      "src/App",
+      "src/components"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

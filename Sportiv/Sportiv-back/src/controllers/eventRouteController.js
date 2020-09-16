@@ -50,7 +50,6 @@ const put = async function (req, res) {
     }
     userUnicId = user._id;
     if (user) {
-      debug(user);
       user.events = checkArr(user.events, _id);
       user.save();
     }
@@ -91,7 +90,6 @@ const patch = (req, res) => {
 };
 
 const get = (req, res) => {
-  console.log("======================================", req.item);
   res.json(req.item);
 };
 
