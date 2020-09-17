@@ -17,7 +17,7 @@ const deleter = ({ item }, res) => {
 
             if (user) {
               const newArr = user.createdEvents.filter((element) => {
-                element !== item._id;
+                element !== item._id
               });
 
               user.createdEvents = newArr;

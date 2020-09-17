@@ -26,14 +26,9 @@ class LessonsStore extends EventEmitter {
 const lessonsStore = new LessonsStore();
 
 dispatcher.register((action) => {
-  switch (action.type) {
-    case actionTypes.LOAD_LESSONS:
-      _lessons = action.data;
-      lessonsStore.emitChange();
-      break;
-
-    default:
-      break;
+  if (action.type === actionTypes.LOAD_LESSONS) {
+    _lessons = action.data;
+    lessonsStore.emitChange();
   }
 });
 

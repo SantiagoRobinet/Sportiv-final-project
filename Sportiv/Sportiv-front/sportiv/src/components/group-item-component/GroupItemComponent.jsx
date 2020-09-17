@@ -34,7 +34,7 @@ function GroupItem({ id }) {
   return (
     <div className="group-card__container">
       <div className="group-card__photo">
-        <img src={actualGroupPhoto} alt="Photo" />
+        <img src={actualGroupPhoto} alt="actual-group" />
       </div>
       <div className="group-details__container">
         <div className="group-title">

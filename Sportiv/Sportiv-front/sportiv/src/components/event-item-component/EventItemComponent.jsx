@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import eventStore from "../../stores/EventsStore";
+import eventStore from "../../stores/eventStore";
 import "./EventItemComponent.scss";
 
 function EventItem({ id }) {
@@ -39,7 +39,7 @@ function EventItem({ id }) {
   return (
     <div className="event-card__container">
       <div className="event-card__photo">
-        <img src={actualEventPhoto} alt="Photo" />
+        <img src={actualEventPhoto} alt="actual-event" />
       </div>
       <div className="details__container">
         <div className="details-title">
@@ -49,13 +49,14 @@ function EventItem({ id }) {
           <div className="details__left">
             <div className="info-start">
               <img
-
                 src="https://image.flaticon.com/icons/svg/1505/1505471.svg"
                 alt="start-flag"
               />
               <div>
                 <p>Start</p>
-                <div className="start-time"><p className="variable">{actualEventStartTime}</p></div>
+                <div className="start-time">
+                  <p className="variable">{actualEventStartTime}</p>
+                </div>
               </div>
             </div>
             <Link to={`/events/${id}`} className="details-button">
@@ -64,11 +65,16 @@ function EventItem({ id }) {
           </div>
           <div className="details__right">
             <div className="info-date">
-                <img src="https://image.flaticon.com/icons/svg/3445/3445710.svg" alt="date" />
+              <img
+                src="https://image.flaticon.com/icons/svg/3445/3445710.svg"
+                alt="date"
+              />
+              <div>
+                <p>Date</p>
                 <div>
-              <p>Date</p>
-              <div><p className="variable">{actualEventDate}</p></div>
-            </div>
+                  <p className="variable">{actualEventDate}</p>
+                </div>
+              </div>
             </div>
             <div className="info-participants">
               <img

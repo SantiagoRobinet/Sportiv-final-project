@@ -2,7 +2,7 @@ import React from "react";
 import APImap from "../mapComponent/Map";
 import { useState, useEffect } from "react";
 import "./EventDetail.scss";
-import eventStore from "../../stores/EventsStore";
+import eventStore from "../../stores/eventStore";
 import {
   deleteEvent,
   joinEvent,
@@ -86,7 +86,7 @@ function EventDetail(props) {
       {event ? (
         <div className="desktop__container flex__column">
           <div className="title__container flex__row">
-            <img src={event.photo} />
+            <img src={event.photo} alt="actual-event" />
             <h2>{event.title}</h2>
           </div>
           <div className="main__container flex__column">

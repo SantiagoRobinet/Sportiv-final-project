@@ -6,7 +6,7 @@ import lessonsStore from "../../stores/LessonsStore";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function LessonDetail(props) {
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   const [lessons, setLessons] = useState(lessonsStore.getLessons());
   const [lessonId, setLessonId] = useState(props.match?.params?.lessonId);
@@ -17,7 +17,6 @@ function LessonDetail(props) {
   const [lessonPrice, setLessonPrice] = useState("");
   const [lessonDuration, setLessonDuration] = useState("");
 
-  const [isBooked, setIsBooked] = useState(null);
 
   useEffect(() => {
     lessonsStore.addChangeListener(onChange);
@@ -36,14 +35,7 @@ function LessonDetail(props) {
         setLessonLevel(lesson.level);
         setLessonPrice(lesson.price);
         setLessonDuration(lesson.duration);
-        // (async function userLoading() {
-        //   await loadUser(user?.sub);
-        //   setMongoUser(userStore.getUser());
-        //   const toogleButton = mongoUser?.lessons.some((item) => {
-        //     return item === lessonId;
-        //   });
-        //   setMember(toogleButton);
-        // })();
+       
       }
     }
     return () => lessonsStore.removeChangeListener(onChange);
@@ -82,7 +74,7 @@ function LessonDetail(props) {
             <div className="lesson-title">
               <h2>{lessonTitle}</h2>
             </div>
-            <img src={lessonPhoto} alt="lesson-photo" />
+            <img src={lessonPhoto} alt="actual-lesson" />
           </div>
           <div className="map-title">
             <h3>WHERE?</h3>
@@ -90,7 +82,7 @@ function LessonDetail(props) {
           <div className="lesson-map">
             <img
               src="https://docs.microsoft.com/es-es/azure/azure-maps/media/migrate-google-maps-web-app/simple-google-map.png"
-              alt="lesson-map"
+              alt="lesson-location"
             />
           </div>
         </div>

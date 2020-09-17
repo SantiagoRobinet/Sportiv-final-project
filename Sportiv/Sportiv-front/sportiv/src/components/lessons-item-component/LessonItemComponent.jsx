@@ -9,7 +9,7 @@ function LessonItem({ id }) {
   const [actualLessonTitle, setActualLessonTitle] = useState("");
 
 
-  useEffect(() => {
+  useEffect((id) => {
     lessonsStore.addChangeListener(onChange);
     if (lessons.length === 0) {
       lessonsStore.getLessons();
@@ -32,7 +32,7 @@ function LessonItem({ id }) {
   return (
     <div className="group-card__container">
       <div className="group-card__photo">
-        <img src={actualLessonPhoto} alt="Photo" />
+        <img src={actualLessonPhoto} alt="actual-lesson" />
       </div>
       <div className="group-details__container">
         <div className="group-title">

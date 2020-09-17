@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import eventStore from "../../stores/EventsStore";
+import eventStore from "../../stores/eventStore";
 import { loadEvents } from "../../actions/EventDetailAction";
 import "./EventsList.scss";
 import EventItem from "../event-item-component/EventItemComponent";
