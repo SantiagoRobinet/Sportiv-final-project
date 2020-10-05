@@ -11,8 +11,8 @@ function APImap({city , street}){
         <iframe
         title="google-map"
         className='map'
-        frameborder="0" 
-        src={`${urlMap()}`} allowfullscreen>
+        frameBorder="0" 
+        src={`${urlMap()}`} allowFullScreen>
         </iframe>
     )
 

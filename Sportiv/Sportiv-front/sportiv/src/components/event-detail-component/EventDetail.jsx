@@ -13,6 +13,8 @@ import UpdateEventForm from "../forms-material-UI-components/UpdateEventFormComp
 import userStore from "../../stores/UserStore";
 import { loadUser } from "../../actions/userActions";
 import { useHistory } from "react-router-dom";
+import Footer from '../footer-component/FooterComponent'
+import Loading from '../loading-component/LoadingComponent'
 
 function EventDetail(props) {
   const history = useHistory();
@@ -141,6 +143,7 @@ function EventDetail(props) {
                   </div>
                 </div>
               </div>
+              {!user && <div> You need to be logged to join the event... </div>}
               {localUser && (
                 <div className="inscription__container flex__row">
                   {!isOwner && (
@@ -230,8 +233,11 @@ function EventDetail(props) {
           </div>
         </div>
       ) : (
-        <p>No event!</p>
+        <div className="no-event-warning">
+         <Loading />
+        </div>
       )}
+      <Footer/>
     </>
   );
 }

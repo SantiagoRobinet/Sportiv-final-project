@@ -11,21 +11,10 @@ function Footer() {
   return (
     <footer className="footer__main">
       <div className="footer__left">
-        <div className="footer-other-pages footer-icon">SANTIAGOROBINET</div>
-        {/* <div className="footer-search footer-icon"><NavLink to="/search"><img src="https://image.flaticon.com/icons/svg/751/751463.svg" alt="hamburguer-button"/></NavLink></div> */}
-      </div>
-      <div className="footer-logo__center">
-        <div className="footer-logo"><NavLink to="/">LOGO</NavLink></div>
-      </div>
+        <div>By Santiago Robinet</div>
+        </div>
       <div className="footer__right">
-        <div className="footer-explore footer-icon"><NavLink to="" ><img src="https://image.flaticon.com/icons/svg/684/684908.svg" alt="explore-button"/></NavLink></div>
-        {isAuthenticated && 
-          <div className="footer-user footer-icon"><NavLink to="/profile"><img className="footer-profile" src={user.picture} alt="profile-button"/></NavLink></div>
-        }
-        {!isAuthenticated && 
-          <div className="footer-user footer-icon"><NavLink to="" onClick={() => loginWithRedirect()}><img src="https://image.flaticon.com/icons/svg/2170/2170153.svg" alt="login-button"/></NavLink></div>
-        }
-
+       <img className="skylab-logo" src="https://www.skylabcoders.com/images/403/default.png" alt="skylab-icon"/>
       </div>
     </footer>
   );
