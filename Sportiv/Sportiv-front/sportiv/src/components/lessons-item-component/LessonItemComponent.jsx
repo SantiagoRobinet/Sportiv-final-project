@@ -9,12 +9,13 @@ function LessonItem({ id }) {
   const [actualLessonTitle, setActualLessonTitle] = useState("");
 
 
-  useEffect((id) => {
+  useEffect(() => {
     lessonsStore.addChangeListener(onChange);
     if (lessons.length === 0) {
       lessonsStore.getLessons();
     } else {
       const actualLesson = lessonsStore.getLessonById(id);
+      debugger;
       if (actualLesson) {
         setActualLessonTitle(actualLesson.title);
         setActualLessonPhoto(actualLesson.photo);

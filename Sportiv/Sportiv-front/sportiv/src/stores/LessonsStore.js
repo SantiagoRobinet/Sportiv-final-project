@@ -21,6 +21,10 @@ class LessonsStore extends EventEmitter {
   getLessons() {
     return _lessons;
   }
+
+  getLessonById(id) {
+    return _lessons.find((lesson) => lesson._id === id);
+  }
 }
 
 const lessonsStore = new LessonsStore();

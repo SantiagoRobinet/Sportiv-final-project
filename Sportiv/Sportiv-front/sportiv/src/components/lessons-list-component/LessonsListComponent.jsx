@@ -22,9 +22,9 @@ function LessonsList() {
   return(
       <>
         <div className="banner__container">
-          <img src="https://secure.meetupstatic.com/photos/event/7/7/c/5/highres_491130661.jpeg" alt="" />
+          <img src="https://secure.meetupstatic.com/photos/event/7/7/c/5/highres_491130661.jpeg" alt="lessons-banner" />
           <div className="banner__container-title">
-            <h1>GROUPS</h1>
+            <h1>LESSONS</h1>
           </div>
         </div>
         <ul className="main__ul__container">

@@ -45,18 +45,7 @@ function LessonDetail(props) {
     setLessons(lessonsStore.getLessons());
   }
 
-  //   function onSubmit(lessonId, user){
-  //     (async function userLoading() {
-  //       await loadUser(user?.sub);
-  //       setMongoUser(userStore.getUser());
-  //       const toogleButton = mongoUser?.lessons.some((item) => {
-  //         return item === lessonId;
-  //       });
-  //       setMember(toogleButton);
-  //       memberJoin(lessonId, user)
-  //     })();
-  //   }
-
+  
   return (
     <>
       <div className="banner__container">
