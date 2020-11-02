@@ -2,7 +2,7 @@ import React from "react";
 import APImap from "../mapComponent/Map";
 import { useState, useEffect } from "react";
 import "./EventDetail.scss";
-import eventStore from "../../stores/EventsStore";
+import eventStore from "../../stores/eventStore";
 import {
   deleteEvent,
   joinEvent,
@@ -13,6 +13,8 @@ import UpdateEventForm from "../forms-material-UI-components/UpdateEventFormComp
 import userStore from "../../stores/UserStore";
 import { loadUser } from "../../actions/userActions";
 import { useHistory } from "react-router-dom";
+import Footer from '../footer-component/FooterComponent'
+import Loading from '../loading-component/LoadingComponent'
 
 function EventDetail(props) {
   const history = useHistory();
@@ -86,7 +88,7 @@ function EventDetail(props) {
       {event ? (
         <div className="desktop__container flex__column">
           <div className="title__container flex__row">
-            <img src={event.photo} />
+            <img src={event.photo} alt="actual-event" />
             <h2>{event.title}</h2>
           </div>
           <div className="main__container flex__column">
@@ -141,6 +143,7 @@ function EventDetail(props) {
                   </div>
                 </div>
               </div>
+              {!user && <div> You need to be logged to join the event... </div>}
               {localUser && (
                 <div className="inscription__container flex__row">
                   {!isOwner && (
@@ -230,8 +233,11 @@ function EventDetail(props) {
           </div>
         </div>
       ) : (
-        <p>No event!</p>
+        <div className="no-event-warning">
+         <Loading />
+        </div>
       )}
+      <Footer/>
     </>
   );
 }

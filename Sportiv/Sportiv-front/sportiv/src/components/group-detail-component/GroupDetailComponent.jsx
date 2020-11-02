@@ -54,18 +54,7 @@ function GroupDetail(props) {
     setGroups(groupStore.getGroups());
   }
 
-  function onSubmit(groupId, user){
-    (async function userLoading() {
-      await loadUser(user?.sub);
-      setMongoUser(userStore.getUser());
-      const toogleButton = mongoUser?.groups.some((item) => {
-        return item === groupId;
-      });
-      setMember(toogleButton);
-      memberJoin(groupId, user)
-    })();
-
-  }
+ 
 
   return (
     <>
@@ -83,7 +72,7 @@ function GroupDetail(props) {
           <div className="group-title">
             <h2>{groupTitle}</h2>
           </div>
-          <img src={groupPhoto} alt="group-photo" />
+          <img src={groupPhoto} alt="actual-group" />
         </div>
         <div className="group-info__container">
           <div className="group-description">

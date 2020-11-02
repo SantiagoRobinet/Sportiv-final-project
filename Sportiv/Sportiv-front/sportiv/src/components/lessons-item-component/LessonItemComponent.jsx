@@ -15,6 +15,7 @@ function LessonItem({ id }) {
       lessonsStore.getLessons();
     } else {
       const actualLesson = lessonsStore.getLessonById(id);
+      debugger;
       if (actualLesson) {
         setActualLessonTitle(actualLesson.title);
         setActualLessonPhoto(actualLesson.photo);
@@ -32,7 +33,7 @@ function LessonItem({ id }) {
   return (
     <div className="group-card__container">
       <div className="group-card__photo">
-        <img src={actualLessonPhoto} alt="Photo" />
+        <img src={actualLessonPhoto} alt="actual-lesson" />
       </div>
       <div className="group-details__container">
         <div className="group-title">

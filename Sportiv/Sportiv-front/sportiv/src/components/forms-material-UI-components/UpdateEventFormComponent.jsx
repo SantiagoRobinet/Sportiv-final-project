@@ -72,7 +72,6 @@ export default function UpdateEventForm({
     street
   ) {
     event.preventDefault();
-    console.log(eventId);
     updateEvent(
       eventId,
       owner,

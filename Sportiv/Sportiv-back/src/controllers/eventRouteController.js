@@ -16,9 +16,7 @@ const deleter = ({ item }, res) => {
             error = findByIdError;
 
             if (user) {
-              const newArr = user.createdEvents.filter((element) => {
-                element !== item._id;
-              });
+              const newArr = user.createdEvents.filter((element) =>  element !== item._id);
 
               user.createdEvents = newArr;
               user.save();

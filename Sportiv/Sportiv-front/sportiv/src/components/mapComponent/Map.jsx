@@ -9,11 +9,10 @@ function APImap({city , street}){
     }
     return(
         <iframe
+        title="google-map"
         className='map'
-        // width="600"
-        // height="450"
-        frameborder="0" 
-        src={`${urlMap()}`} allowfullscreen>
+        frameBorder="0" 
+        src={`${urlMap()}`} allowFullScreen>
         </iframe>
     )
 

@@ -70,7 +70,6 @@ dispatcher.register((action) => {
       break;
 
     case actionTypes.DELETE_EVENT:
-      console.log(action.data);
       _events = _events.filter((element) => element !== action.data);
       eventStore.emitChange();
       break;

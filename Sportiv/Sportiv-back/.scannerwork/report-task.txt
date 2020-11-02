@@ -1,0 +1,6 @@
+projectKey=sportiv-back
+serverUrl=http://localhost:9000
+serverVersion=8.4.1.35646
+dashboardUrl=http://localhost:9000/dashboard?id=sportiv-back
+ceTaskId=AXSbQ3ZXPn_JphWEtR2x
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXSbQ3ZXPn_JphWEtR2x

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './EventFormComponent.scss';
 import CreateEventForm from "../forms-material-UI-components/CreateEventFormComponent"
+import Footer from '../footer-component/FooterComponent'
 
 function EventForm() {
 
@@ -18,7 +19,7 @@ function EventForm() {
             <CreateEventForm />
         </div>
 
-       
+        <Footer/>
       </>
   )
 }

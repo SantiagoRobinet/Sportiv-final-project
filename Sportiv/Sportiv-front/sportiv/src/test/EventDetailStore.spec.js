@@ -1,4 +1,4 @@
-import eventStore from "../stores/EventsStore";
+import eventStore from "../stores/eventStore";
 import actionTypes from "../actions/actionTypes";
 import dispatcher from "../dispatcher";
 
